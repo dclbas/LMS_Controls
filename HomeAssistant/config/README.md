@@ -4,7 +4,7 @@ In short you need to add these entries to your existing configuration.yaml, scri
 
 ## Modifications Required
 The following files need to be edited to add your personal acess keys, secrets, links and passwords for access to Home Assistant, Spotify, LMS Server, etc..
-- **_script_lms_controls.yaml_**
+- **_script_lms_controls.yaml_** file:
   - The contents of this file need to be merged into your current scripts.yaml file.  This file performs the following functions:
     - Sets the input variables returned from DialogFlow (Google Home Requests)
     - Calls the query functions to determine song, album, artist or playlist links from either LMS database or Spotify
