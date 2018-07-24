@@ -40,12 +40,11 @@ The basic approach is as follows:
 		- Paging / general announcements throughout the home 
 
 ## Prerequisites:
-To make this work, you need the following:\
-
-- Logitech Media Server\
-- Home Assistant - open source home automation package\
-- Google Home (or google assistant)\
-- Developer account for Dialogflow for the voice activation part\
+To make this work, you need the following:
+- Logitech Media Server
+- Home Assistant - open source home automation package
+- Google Home (or google assistant)
+- Developer account for Dialogflow for the voice activation part
 - Spotify account with Client_ID and Client_Secret to allow query processing
 
 ## Installation:	
