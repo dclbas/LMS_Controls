@@ -1,0 +1,17 @@
+  my_player:
+    name: LMS Music Player Control
+    entities:
+    - input_select.lms_player
+    - input_number.lms_volume
+    - input_number.lms_sleep_time
+    - input_select.lms_source
+    - input_text.lms_artist
+    - input_text.lms_album
+    - input_text.lms_song
+    - input_text.lms_playlist
+    - input_select.lms_command
+    - script.lms_cmd_pause_player
+    - script.lms_cmd_start_player
+    - script.lms_cmd_next_track
+    - input_boolean.lms_shuffle
+    - input_boolean.lms_repeat
