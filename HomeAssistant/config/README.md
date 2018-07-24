@@ -28,5 +28,9 @@ The following files need to be edited to add your personal acess keys, secrets, 
   - For the files:  qry_alb.sh, qry_alb_song.sh the following modifications are required:
     - Replace `localhost 9090` with `your path to LMS CLI interface & Port#`
     - Update `https://HA_Link.duckdns.org/api/states/sensor.art_ID?api_password=HA_API_Password` with you're `HA_Link` (accessible from the internet) and you're `HA_API_Password`
+  - For the files:  spot_art_alb.sh, spot_art_alb_song.sh, spot_art_top.sh and spot_playlist.sh the following modifications are required:
+    - Replace `Spotify_Client_ID` with `your Spotify_Client_ID`
+    - Replace `Spotify_Client_Secret` with `your Spotify_Client_Secret`
+    - Update `https://HA_Link.duckdns.org/api/states/sensor.art_ID?api_password=HA_API_Password` with you're `HA_Link` (accessible from the internet) and you're `HA_API_Password`
   
   
