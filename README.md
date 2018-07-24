@@ -50,8 +50,8 @@ To make this work, you need the following:
 ## Installation:	
 Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
 	
-## Home Assistant GUI for LMS Controls Tool
-![Alt text](/HA_LMS_GUI.jpg?raw=true "Title") ![Alt text](/HA_LMS_GUI_STD.jpg?raw=true "Title")
+## Home Assistant GUIs for LMS Player Controls Tool
+![Alt text](/HA_LMS_GUI.jpg?raw=true "Lovelace Based GUI") ![Alt text](/HA_LMS_GUI_STD.jpg?raw=true "Traditional GUI")
 
 ## Some Useful Links:
 [Logitech Squeezebox Server](https://mysqueezebox.com/index/Home)\
