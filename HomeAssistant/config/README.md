@@ -13,20 +13,20 @@ The following files need to be edited to add your personal acess keys, secrets, 
       - When troubleshooting, you can run these scripts in a shell independently of HA to see the results of your queries
     - **_input_number, input_boolean, input_select, input_text_** components:
       - Input variables required for the application
-      - **_lms_player_** input_select entry needs to be modified to reflect the friendly name of your existing LMS players 
+      - **_lms_player_** input_select entry needs to be modified to reflect the friendly name of your existing LMS players\
 - **_automations.yaml_** file:
   - The contents of this file is to be merged into your existing automations.yaml file.  The automation additions include:
     - An entry for each LMS Player Control GUI function.  These include:
-        - Volume, Sleep Timer, Shuffle, Repeat, Pause, Re-start, Next Track and LMS_commands for (Add / Play artists, albums, songs, playlists and radio stations) 
+        - Volume, Sleep Timer, Shuffle, Repeat, Pause, Re-start, Next Track and LMS_commands for (Add / Play artists, albums, songs, playlists and radio stations)\
 - **_script_lms_controls.yaml_** file:
   - The contents of this file need to be merged into your current scripts.yaml file.  This file performs the following functions:
     - Sets the input variables returned from DialogFlow (Google Home Requests)
     - Calls the query functions to determine song, album, artist or playlist links from either LMS database or Spotify
     - Adds the links to the selected media player queue using either ADD or PLAY functions
-    - Provides Pause, Re-start or Next track functions for selected player
+    - Provides Pause, Re-start or Next track functions for selected player\
 - **_shell_** sub-directory:
   - For the files:  qry_alb.sh, qry_alb_song.sh the following modifications are required:
     - Replace `localhost 9090` with `your path to LMS CLI interface & Port#`
-    - Update `https://HA_Link.duckdns.org/api/states/sensor.art_ID?api_password=HA_API_Password` with you're `HA_Link` (accessible from the internet) and you're `HA_API_Password`
+    - Update `https://HA_Link.duckdns.org/api/states/sensor.art_ID?api_password=HA_API_Password` with you're `HA_Link` (accessible from the internet) and you're `HA_API_Password`\
   
   
