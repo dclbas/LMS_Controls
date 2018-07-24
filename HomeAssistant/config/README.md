@@ -4,6 +4,12 @@ In short you need to add these entries to your existing configuration.yaml, scri
 
 ## Modifications Required
 The following files need to be edited to add your personal acess keys, secrets, links and passwords for access to Home Assistant, Spotify, LMS Server, etc..
+- **_script_lms_controls.yaml_**
+  - The contents of this file need to be merged into your current scripts.yaml file.  This file performs the following functions:
+    - Sets the input variables returned from DialogFlow (Google Home Requests)
+    - Calls the query functions to determine song, album, artist or playlist links from either LMS database or Spotify
+    - Adds the links to the selected media player queue using either ADD or PLAY functions
+    - Provides Pause, Re-start or Next track functions for selected player
 - **_shell_** sub-directory:
   - For the files:  qry_alb.sh, qry_alb_song.sh the following modifications are required:
     - Replace `localhost 9090` with `your path to LMS CLI interface & Port#`
