@@ -63,6 +63,9 @@ Home Assistant is an open source home automation platform running on Python 3. I
 [Dialogflow](https://dialogflow.com/)\
 Dialogflow is a conversational platform that gives users new ways to interact with their products by building engaging voice and text-based conversational interfaces, such as voice apps and chatbots, powered by AI. It features an easy-to-use front-end, natural language understanding (NLU), machine learning, and more.
 
+[Spotify Developer](https://developer.spotify.com/)
+Where music meets code. Exposes powerful APIs, SDKs and widgets for integration of simple and advanced applications. 
+
 ## Our Support Communities:
 [Squeezebox Community Forums](https://forums.slimdevices.com/)\
 Anything you need to know about your LMS server is here.  
