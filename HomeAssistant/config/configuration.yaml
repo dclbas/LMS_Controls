@@ -1,0 +1,96 @@
+media_player:
+  - platform: squeezebox
+    host: LMS_Host_IP
+
+shell_command:
+  lms_qry_alb: 'bash /config/shell/qry_alb.sh {{text1}} {{text2}}'
+  lms_qry_alb_song: 'bash /config/shell/qry_alb_song.sh {{text1}} {{text2}} {{text3}}'
+  lms_spot_art: 'bash /config/shell/spot_art_top.sh {{text1}}'
+  lms_spot_art_alb: 'bash /config/shell/spot_art_alb.sh {{text1}} {{text2}}'
+  lms_spot_art_alb_song: 'bash /config/shell/spot_art_alb_song.sh {{text1}} {{text2}} {{text3}}'
+  lms_spot_playlist: 'bash /config/shell/spot_playlist.sh {{text1}}'
+  
+input_number:
+  lms_volume:
+    name: Volume
+    min: 0
+    max: 100 
+    step: 1
+    icon: mdi:volume-high
+  lms_sleep_time:
+    name: Sleep Timer
+    min: 0
+    max: 60
+    step: 1
+    icon: mdi:timer
+
+input_boolean:
+  lms_shuffle:
+    name: Shuffle
+    icon: mdi:shuffle-variant
+  lms_repeat:
+    name: Repeat
+    icon: mdi:repeat
+
+
+input_select:
+  lms_command:
+    name: LMS Command
+    options:
+      - __________________
+      - add album
+      - add artist
+      - add playlist
+      - add song
+#      - next track
+      - play album
+      - play artist
+      - play playlist
+      - play song
+#      - player pause
+#      - player restart
+    icon: mdi:run-fast
+  lms_source:
+    name: Music Source
+    options:
+      - spotify
+      - lms
+    initial: spotify
+    icon: mdi:library
+  lms_player:
+    name: Media Player Name
+    options:
+      - mediaroom
+      - kitchen
+      - garage
+      - familyroom
+      - googlehome
+      - googlemini_1
+      - googlemini_2
+    icon: mdi:cast
+
+input_text:
+  lms_artist:
+    name: Artist Name
+    initial: ""
+    icon: mdi:artist
+  lms_album:
+    name: Album Title
+    initial: ""
+    icon: mdi:album
+  lms_song:
+    name: Song
+    initial: ""
+    icon: mdi:itunes
+  lms_playlist:
+    name: Playlist
+    initial: ""
+    icon: mdi:playlist-play
+  lms_command_intent:
+    name: Google Intent LMS Command
+  lms_p1:
+    name: Parameter 1
+  lms_p2:
+    name: Parameter 2
+  lms_p3:
+    name: Parameter 3

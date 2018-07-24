@@ -1,0 +1,242 @@
+# LMS GUI Volume control
+  - alias: "LMS GUI Volume Control"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_number.lms_volume
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: "mixer"
+        parameters: ["volume", "{{states.input_number.lms_volume.state}}"]
+
+
+# LMS GUI Sleep Time control
+  - alias: "LMS GUI Sleep Timer Control"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_number.lms_sleep_time
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: "sleep"
+        parameters: ["{{states.input_number.lms_sleep_time.state|int * 60}}"]
+
+
+# LMS GUI Shuffle On / Off
+  - alias: "LMS GUI Shuffle Control"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_shuffle
+    action:
+    - service:  media_player.shuffle_set
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        shuffle: >
+            {% if (states.input_boolean.lms_shuffle.state == "on") %} true
+            {% else %} false {% endif %}
+
+
+# LMS GUI Repeat On / Off
+  - alias: "LMS GUI Repeat Control"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_repeat
+    action:
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p1
+        value:  >
+            {% if (states.input_boolean.lms_repeat.state == "on") %} 2
+            {% else %} 0 {% endif %}
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: "playlist"
+        parameters: ["repeat", "{{states.input_text.lms_p1.state}}"]
+
+
+# LMS GUI Command for play playlist
+  - alias: "LMS GUI Play Playlist Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "play playlist"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_play_playlist
+            {% else %}
+                script.lms_cmd_play_playlist_spot
+            {% endif %}          
+
+
+# LMS GUI Command for add playlist
+  - alias: "LMS GUI Add Playlist Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "add playlist"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_add_playlist
+            {% else %}
+                script.lms_cmd_add_playlist_spot
+            {% endif %}          
+
+      
+# LMS GUI Command for play artist
+  - alias: "LMS GUI Play Artist Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "play artist"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_play_artist
+            {% else %}
+                script.lms_cmd_play_artist_spot
+            {% endif %}          
+
+
+# LMS GUI Command for add artist
+  - alias: "LMS GUI Add Artist Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "add artist"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_add_artist
+            {% else %}
+                script.lms_cmd_add_artist_spot
+            {% endif %}          
+
+
+# LMS GUI Command for play album
+  - alias: "LMS GUI Play Album Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "play album"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_play_album
+            {% else %}
+                script.lms_cmd_play_album_spot
+            {% endif %}          
+
+
+# LMS GUI Command for add album
+  - alias: "LMS GUI Add Album Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "add album"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_add_album
+            {% else %}
+                script.lms_cmd_add_album_spot
+            {% endif %}          
+
+
+# LMS GUI Command for play song
+  - alias: "LMS GUI Play Song Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "play song"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_play_song
+            {% else %}
+                script.lms_cmd_play_song_spot
+            {% endif %}          
+
+
+# LMS GUI Command for add song
+  - alias: "LMS GUI Add Song Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "add song"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (states.input_select.lms_source.state == "lms") %}
+                script.lms_cmd_add_song
+            {% else %}
+                script.lms_cmd_add_song_spot
+            {% endif %}          
+
+
+# LMS GUI Command for next track
+  - alias: "LMS GUI Next Track Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "next track"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: script.lms_cmd_next_track
+
+# LMS GUI Command for pause player
+  - alias: "LMS GUI Pause Player Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "player pause"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: script.lms_cmd_pause_player
+        
+# LMS GUI Command for re-start of player
+  - alias: "LMS GUI Player Re-start Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_command
+      to: "player restart"
+    action:
+    - service: script.turn_on
+      data_template:
+        entity_id: script.lms_cmd_start_player
