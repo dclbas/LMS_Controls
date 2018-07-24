@@ -1,0 +1,402 @@
+### lms_control script: - Logitech Media Server primary control script for use with Google Dialog Flow project "LMS Controls"
+###     - sets the variables from google dialog flow
+###     - calls up the proper LMS control subscript based on intentName from google dialog flow project
+lms_control:
+  alias:  'LMS Controls for use with Google Dialog Flow'
+  sequence:
+###  Set variables coming from dialog flow, unused variables will be set to blank 
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_command_intent
+        value: "{{queryResult.intent.displayName}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_player
+        option: "{{queryResult.parameters.lms_player}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_source
+        value: "{{queryResult.parameters.lms_source}}"
+    - service_template: >
+             {% if queryResult.parameters.lms_shuffle == "on" %} input_boolean.turn_on
+             {% else %} input_boolean.turn_off
+             {% endif %}
+      entity_id: input_boolean.lms_shuffle
+    - service_template: >
+             {% if queryResult.parameters.lms_repeat == "on" %} input_boolean.turn_on
+             {% else %} input_boolean.turn_off
+             {% endif %}
+      entity_id: input_boolean.lms_repeat
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_artist
+        value: "{{queryResult.parameters.lms_artist}}"
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_album
+        value: "{{queryResult.parameters.lms_album}}"
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_song
+        value: "{{queryResult.parameters.lms_song}}"
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_playlist
+        value: "{{queryResult.parameters.lms_playlist}}"
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.lms_volume
+        value: "{{queryResult.parameters.lms_volume}}"
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.lms_sleep_time
+        value: "{{queryResult.parameters.lms_sleep_time}}"
+
+
+### check lms_command and call appropriate script
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (queryResult.intent.displayName == "next_track") %}
+              script.lms_cmd_next_track
+            {% elif (queryResult.intent.displayName == "pause_player") %}
+              script.lms_cmd_pause_player
+            {% elif (queryResult.intent.displayName == "start_player") %}
+              script.lms_cmd_start_player
+            {% elif ((queryResult.intent.displayName == "play_song") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_play_song
+            {% elif ((queryResult.intent.displayName == "play_song") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_play_song_spot  
+            {% elif ((queryResult.intent.displayName == "play_playlist") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_play_playlist
+            {% elif ((queryResult.intent.displayName == "play_playlist") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_play_playlist_spot
+            {% elif ((queryResult.intent.displayName == "play_artist") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_play_artist
+            {% elif ((queryResult.intent.displayName == "play_artist") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_play_artist_spot
+            {% elif ((queryResult.intent.displayName == "play_album") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_play_album
+            {% elif ((queryResult.intent.displayName == "play_album") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_play_album_spot
+            {% elif ((queryResult.intent.displayName == "add_album") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_add_album
+            {% elif ((queryResult.intent.displayName == "add_album") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_add_album_spot
+            {% elif ((queryResult.intent.displayName == "add_artist") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_add_artist
+            {% elif ((queryResult.intent.displayName == "add_artist") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_add_artist_spot
+            {% elif ((queryResult.intent.displayName == "add_song") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_add_song
+            {% elif ((queryResult.intent.displayName == "add_song") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_add_song_spot
+            {% elif ((queryResult.intent.displayName == "add_playlist") and (queryResult.parameters.lms_source == "lms")) %}
+              script.lms_cmd_add_playlist
+            {% elif ((queryResult.intent.displayName == "add_playlist") and (queryResult.parameters.lms_source == "spotify")) %}
+              script.lms_cmd_add_playlist_spot
+            {% elif (queryResult.intent.displayName == "play_radio") %}
+              script.lms_cmd_play_radio
+            {% endif %}
+
+
+lms_cmd_play_song:
+  alias:  "LMS command to play LMS song"
+  sequence:
+    - service: shell_command.lms_qry_alb_song
+      data_template:
+        text1: "_{{states.input_text.lms_artist.state | replace(' ','_')}}"
+        text2: "_{{states.input_text.lms_album.state | replace(' ','_')}}"
+        text3: "{{states.input_text.lms_song.state | replace(' ','_')}}"
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p1
+        value: >
+            {% if (states.sensor.song_id.state == "0") %} loadtracks           
+            {% else %} cmd:load
+            {% endif %}
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p2
+        value: >
+            {% if (states.sensor.song_id.state == "0") %} track.titlesearch={{states.variable.var_lms_song.state}}           
+            {% else %} track_id:{{states.sensor.song_id.state}}
+            {% endif %}
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: >
+            {% if (states.sensor.song_id.state == "0") %} playlist
+            {% else %} playlistcontrol
+            {% endif %}
+        parameters: ["{{states.input_text.lms_p1.state}}","{{states.input_text.lms_p2.state}}"]
+
+lms_cmd_play_song_spot:
+  alias:  "LMS command to play Spotify song"
+  sequence:
+    - service: shell_command.lms_spot_art_alb_song
+      data_template:
+        text3: "{{states.input_text.lms_artist.state | replace(' ','+')}}"
+        text2: "{{states.input_text.lms_album.state | replace(' ','+')}}"
+        text1: "{{states.input_text.lms_song.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["play","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_add_song:
+  alias:  "LMS command to add LMS song to the queue"
+  sequence:
+    - service: shell_command.lms_qry_alb_song
+      data_template:
+        text1: "_{{states.input_text.lms_artist.state | replace(' ','_')}}"
+        text2: "_{{states.input_text.lms_album.state | replace(' ','_')}}"
+        text3: "{{states.input_text.lms_song.state | replace(' ','_')}}"
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p1
+        value: >
+            {% if (states.sensor.song_id.state == "0") %} addtracks           
+            {% else %} cmd:add
+            {% endif %}
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p2
+        value: >
+            {% if (states.sensor.song_id.state == "0") %} track.titlesearch={{states.variable.var_lms_song.state}}           
+            {% else %} track_id:{{states.sensor.song_id.state}}
+            {% endif %}
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: >
+            {% if (states.sensor.song_id.state == "0") %} playlist
+            {% else %} playlistcontrol
+            {% endif %}
+        parameters: ["{{states.input_text.lms_p1.state}}","{{states.input_text.lms_p2.state}}"]
+
+lms_cmd_add_song_spot:
+  alias:  "LMS command to add Spotify song to the queue"
+  sequence:
+    - service: script.turn_on
+      data_template:
+        entity_id: script.lms_cmd_shuffle
+    - service: shell_command.lms_spot_art_alb_song
+      data_template:
+        text3: "{{states.input_text.lms_artist.state | replace(' ','+')}}"
+        text2: "{{states.input_text.lms_album.state | replace(' ','+')}}"
+        text1: "{{states.input_text.lms_song.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["add","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_play_playlist:
+  alias:  "LMS command to play LMS playlist"
+  sequence:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["play",'{{states.input_text.lms_playlist.state|title|trim|replace(" ","_")}}']
+    
+lms_cmd_play_playlist_spot:
+  alias:  "LMS command to play Spotify playlist"
+  sequence:
+    - service: shell_command.lms_spot_playlist
+      data_template:
+        text1: "{{states.input_text.lms_playlist.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["play","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_add_playlist:
+  alias:  "LMS command to add LMS playlist to the queue"
+  sequence:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["add",'{{states.input_text.lms_playlist.state|title|trim|replace(" ","_")}}']
+
+lms_cmd_add_playlist_spot:
+  alias:  "LMS command to add Spotify playlist"
+  sequence:
+    - service: shell_command.lms_spot_playlist
+      data_template:
+        text1: "{{states.input_text.lms_playlist.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["add","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_play_artist:
+  alias:  "LMS command to play LMS artist"
+  sequence:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["loadtracks","contributor.namesearch={{states.input_text.lms_artist.state}}"]
+
+lms_cmd_play_artist_spot:
+  alias:  "LMS command to play Spotify artist"
+  sequence:
+    - service: shell_command.lms_spot_art
+      data_template:
+        text1: "{{states.input_text.lms_artist.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["play","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_add_artist:
+  alias:  "LMS command to add LMS artist to the queue"
+  sequence:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["addtracks","contributor.namesearch={{states.input_text.lms_artist.state}}"]
+
+lms_cmd_add_artist_spot:
+  alias:  "LMS command to add LMS artist to the queue"
+  sequence:
+    - service: shell_command.lms_spot_art
+      data_template:
+        text1: "{{states.input_text.lms_artist.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["add","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_play_album:
+  alias:  "LMS command to play LMS album"
+  sequence:
+    - service: shell_command.lms_qry_alb
+      data_template:
+        text1: "_{{states.input_text.lms_artist.state | replace(' ','_')}}"
+        text2: "{{states.input_text.lms_album.state | replace(' ','_')}}"
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p1
+        value: >
+            {% if (states.sensor.alb_id.state == "0") %} loadtracks           
+            {% else %} cmd:load
+            {% endif %}
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p2
+        value: >
+            {% if (states.sensor.alb_id.state == "0") %} album.titlesearch={{states.variable.var_lms_album.state}}           
+            {% else %} album_id:{{states.sensor.alb_id.state}}
+            {% endif %}
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: >
+            {% if (states.sensor.alb_id.state == "0") %} playlist
+            {% else %} playlistcontrol
+            {% endif %}
+        parameters: ["{{states.input_text.lms_p1.state}}","{{states.input_text.lms_p2.state}}"]
+
+lms_cmd_play_album_spot:
+  alias:  "LMS command to play Spotify album"
+  sequence:
+    - service: shell_command.lms_spot_art_alb
+      data_template:
+        text1: "{{states.input_text.lms_album.state | replace(' ','+')}}"
+        text2: "{{states.input_text.lms_artist.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["play","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_add_album:
+  alias:  "LMS command to add LMS album to the queue"
+  sequence:
+    - service: shell_command.lms_qry_alb
+      data_template:
+        text1: "_{{states.input_text.lms_artist.state | replace(' ','_')}}"
+        text2: "{{states.input_text.lms_album.state | replace(' ','_')}}"
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p1
+        value: >
+            {% if (states.sensor.alb_id.state == "0") %} addtracks           
+            {% else %} cmd:add
+            {% endif %}
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p2
+        value: >
+            {% if (states.sensor.alb_id.state == "0") %} album.titlesearch={{states.variable.var_lms_album.state}}           
+            {% else %} album_id:{{states.sensor.alb_id.state}}
+            {% endif %}
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: >
+            {% if (states.sensor.alb_id.state == "0") %} playlist
+            {% else %} playlistcontrol
+            {% endif %}
+        parameters: ["{{states.input_text.lms_p1.state}}","{{states.input_text.lms_p2.state}}"]
+
+lms_cmd_add_album_spot:
+  alias:  "LMS command to add LMS album to the queue"
+  sequence:
+    - service: shell_command.lms_spot_art_alb
+      data_template:
+        text1: "{{states.input_text.lms_album.state | replace(' ','+')}}"
+        text2: "{{states.input_text.lms_artist.state | replace(' ','+')}}"
+    - service:  media_player.squeezebox_call_method
+      data_template: 
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["add","{{states.sensor.spotify_uri.state}}"]
+
+lms_cmd_next_track:
+  alias:  "LMS command to advance to the next track"
+  sequence:
+    - service:  media_player.media_next_track
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        
+lms_cmd_pause_player:
+  alias:  "LMS command to pause a media player"
+  sequence:
+    - service:  media_player.media_pause
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+
+lms_cmd_start_player:
+  alias:  "LMS command to re-start a media player"
+  sequence:
+    - service:  media_player.turn_on
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+    - service:  media_player.media_play
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+
+lms_cmd_play_radio:
+  alias:  "LMS command to play radio station"
+  sequence:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_player.state}}"
+        command: playlist
+        parameters: ["play",'Radio_{{states.input_text.lms_playlist.state|title|trim|replace(" ","_")}}']
+
+
+
+###     This concludes the section that is associated with LMS Controls application
+###     associated with Google Dialog Flow project "LMS Controls"
