@@ -32,5 +32,7 @@ The following files need to be edited to add your personal acess keys, secrets, 
     - Replace `Spotify_Client_ID` with `your Spotify_Client_ID`
     - Replace `Spotify_Client_Secret` with `your Spotify_Client_Secret`
     - Update `https://HA_Link.duckdns.org/api/states/sensor.art_ID?api_password=HA_API_Password` with you're `HA_Link` (accessible from the internet) and you're `HA_API_Password`
-  
-  
+- **_groups.yaml_** file:
+  - The content of this file can be merged into your `groups.yaml` file to create the basic GUI used in HA.  A somewhat better looking GUI is available when using the Lovelace GUI.
+- **_ui-lovelace.yaml_** file:
+  - The content of this file can be merged into your `ui-lovelace.yaml` file to create the Lovelace GUI used in HA.  A somewhat better looking GUI is available when using the LoveLace GUI.
