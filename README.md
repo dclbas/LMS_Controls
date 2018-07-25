@@ -1,5 +1,5 @@
 ## LMS Controls
-Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH)
+Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH). A little [audio demo](https://github.com/ynot123/LMS_Controls/blob/master/LMS%20Controls%20Demo.mp3) is available.  Also see the Home Assistant GUI below.
 
 ## What Can It Do:
 Allows voice control for your Logitech Media Server (LMS) from Google Home (GH) or Google Assistant (GA) with Home Assistant (HA) acting as the middle man.  Using these tools, you can do the following:
