@@ -35,8 +35,8 @@ Album ID is: 3661
 now Posting results
 
 {"attributes": {}, "entity_id": "sensor.art_id", "last_changed": "2018-07-26T23:38:14.363233+00:00", "last_updated": "2018-07-26T23:38:14.363233+00:00", "state": "2909"}
-{"attributes": {}, "entity_id": "sensor.alb_id", "last_changed": "2018-07-26T23:38:14.423206+00:00", "last_updated": "2018-07-26T23:38:14.423206+00:00", "state": "3661"}```
-
+{"attributes": {}, "entity_id": "sensor.alb_id", "last_changed": "2018-07-26T23:38:14.423206+00:00", "last_updated": "2018-07-26T23:38:14.423206+00:00", "state": "3661"} 
+```
 In this case it picked out Artists ID: 2909 and Album ID: 3661 and posted those reults to sensor.art_id and sensor.alb_id respectively.
   
   
