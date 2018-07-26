@@ -1,3 +1,8 @@
 ## A Couple of Specific Things to Note Regarding LMS Installation
 
 **_Radio Stations_**
+- For radio station support, I cheated. Essentially radio stations are pre-defined in LMS as a playlist with following the naming format: Radio_StationName all in Title Case. So some of mine include:
+  - Radio_Cbc
+  - Radio_Q92
+  - Radio_Country_Classics
+- Seemed like the easiest way to get there from here. This way all the linking is inside LMS.
