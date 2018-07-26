@@ -13,10 +13,9 @@ The query functions for both LMS and Spotify music sources can be run on their o
 
 A typical query against the LMS database in this case is shown below:
 
-`bash-4.4# bash qry_alb.sh supertramp breakfast_in_america`
-Results in:
+`bash-4.4# bash qry_alb.sh supertramp breakfast_in_america
 
-`Artists are:
+Artists are:
 artists 0 20 search%3Asupertramp tags%3Aa id%3A2909 artist%3ASupertramp count%3A1
 
 Artist check zero is: 1
@@ -37,6 +36,6 @@ now Posting results
 {"attributes": {}, "entity_id": "sensor.art_id", "last_changed": "2018-07-26T23:38:14.363233+00:00", "last_updated": "2018-07-26T23:38:14.363233+00:00", "state": "2909"}
 {"attributes": {}, "entity_id": "sensor.alb_id", "last_changed": "2018-07-26T23:38:14.423206+00:00", "last_updated": "2018-07-26T23:38:14.423206+00:00", "state": "3661"}`
 
-
+hhhh
   
   
