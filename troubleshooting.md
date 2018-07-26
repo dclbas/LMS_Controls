@@ -15,6 +15,7 @@ A typical query against the LMS database in this case is shown below:
 
 `bash-4.4# bash qry_alb.sh supertramp breakfast_in_america`
 Results in:
+
 `Artists are:
 artists 0 20 search%3Asupertramp tags%3Aa id%3A2909 artist%3ASupertramp count%3A1
 
