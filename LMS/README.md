@@ -7,6 +7,7 @@
   - Radio_Country_Classics
 - Seemed like the easiest way to get there from here. This way all the linking is inside LMS.
 
-**_Spotty_**
-- The plugin `Spotty` is required for Spotify to work
+**_Spotify_**
+- The plugin `Spotty` is required for Spotify music source to work
 - At this time, I believe only PAID subscriptions will work with the full query features.
+- Further testing will be done to see what can be made to work with the free version
