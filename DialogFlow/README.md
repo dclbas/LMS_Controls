@@ -3,6 +3,7 @@ In order to get started you need to sign up for an account at the [DialogFlow we
 - Create a New Agent, call it what you wish. Select your default language and time zone and finally click Create
 - Under the DF Sidebar, click on the **gear icon** to call up your Agent settings
 - Click on **Export and Import** and import the ZIP file `LMS_Control_Agent - Sanitized.zip`.  This will import the pre-defined entities and intents to be used by Google Home or Google Assistant.
+- Under the **General Tab** ensure API Version is set to **V2 API**
 
 **_Webhooks_** setup:
 - Enable Webhooks under the fullfilment section of DF
