@@ -9,7 +9,32 @@ Once the HA files are installed you can test the basic installation using the GU
   
 **_Shell Commands:_**
 
-The query functions for both LMS and Spotify music sources can be run on their own in a shell environment.  The general format for running the commands is: `bash command.sh $1 $2 $2` where command is the shell command name, $1 is the first parameter to pass (ie: artist) $2 is the second parameter (ie: album) and $3 is the third parameter (ie: song).  Below are some of the commands and expected results which then get returned to HA.
+The query functions for both LMS and Spotify music sources can be run on their own in a shell environment.  The general format for running the commands is: `bash command.sh $1 $2 $3` where command is the shell command name, $1 is the first parameter to pass (ie: artist) $2 is the second parameter (ie: album) and $3 is the third parameter (ie: song).  Below are some of the commands and expected results which then get returned to HA.
+
+A typical query against the LMS database in this case is shown below:
+
+`bash-4.4# bash qry_alb.sh supertramp breakfast_in_america`
+Results in:
+`Artists are:
+artists 0 20 search%3Asupertramp tags%3Aa id%3A2909 artist%3ASupertramp count%3A1
+
+Artist check zero is: 1
+
+
+Artist found so moving on to albums....
+
+Album check zero is: 3
+
+
+Albums are:
+albums 0 20 artist_id%3A2909 search%3Abreakfast_in_america tags%3Aal id%3A3661 album%3ABreakfast%20in%20America artist%3ASupertramp id%3A3665 album%3AThe%20Very%20Best%20Of%20Supertramp artist%3ASupertramp id%3A3668 album%3ARetrospectacle%3A%20The%20Supertramp%20Anthology artist%3ASupertramp count%3A3
+
+Artist ID is:2909
+Album ID is: 3661
+now Posting results
+
+{"attributes": {}, "entity_id": "sensor.art_id", "last_changed": "2018-07-26T23:38:14.363233+00:00", "last_updated": "2018-07-26T23:38:14.363233+00:00", "state": "2909"}
+{"attributes": {}, "entity_id": "sensor.alb_id", "last_changed": "2018-07-26T23:38:14.423206+00:00", "last_updated": "2018-07-26T23:38:14.423206+00:00", "state": "3661"}`
 
 
   
