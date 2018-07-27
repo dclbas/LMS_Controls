@@ -69,3 +69,4 @@ In this case the query returned the album **uri link: spotify:album:1zcm3UvHNHps
 Here's a few tips and things to check in the DialogFlow portion of this project.
 - Under the DF Sidebar, click on the **gear icon** to call up your Agent settings
 - Select the **General Tab** and ensure API Version is set to **V2 API**
+- Use the HA GUI to see how your commands are being interpreted.  This is especially useful when querying items with numbers, etc..  Here you get to see how google home interpreted your voice commands.
