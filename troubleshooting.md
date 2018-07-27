@@ -37,7 +37,7 @@ now Posting results
 {"attributes": {}, "entity_id": "sensor.art_id", "last_changed": "2018-07-26T23:38:14.363233+00:00", "last_updated": "2018-07-26T23:38:14.363233+00:00", "state": "2909"}
 {"attributes": {}, "entity_id": "sensor.alb_id", "last_changed": "2018-07-26T23:38:14.423206+00:00", "last_updated": "2018-07-26T23:38:14.423206+00:00", "state": "3661"} 
 ```
-In this case it picked out Artists ID: 2909 and Album ID: 3661 and posted those reults to sensor.art_id and sensor.alb_id respectively.  These values will later be used in the add or play LMS album script.
+In this case it picked out **Artists ID: 2909** and **Album ID: 3661** and posted those reults to sensor.art_id and sensor.alb_id respectively.  These values will later be used in the add or play LMS album script.
   
 
 A typical query against the Spotify music source is shown below (notice spaces are replaced with + for Spotify queries):
@@ -61,4 +61,9 @@ uri is: spotify:album:1zcm3UvHNHpseYOUfd0pna
 
 {"attributes": {}, "entity_id": "sensor.spotify_uri", "last_changed": "2018-07-27T00:05:28.674277+00:00", "last_updated": "2018-07-27T00:05:28.674277+00:00", "state": "spotify:album:1zcm3UvHNHpseYOUfd0pna"}
 ```
-In this case the query retuned the album uri link: spotify:album:1zcm3UvHNHpseYOUfd0pna and posted that reult to sensor.spotify.uri for later use in the add or play spotify album script.
+In this case the query returned the album **uri link: spotify:album:1zcm3UvHNHpseYOUfd0pna** and posted that reult to sensor.spotify.uri for later use in the add or play spotify album script.
+
+**_DialogFlow_**
+Here's a few tips and things to check in the DialogFlow portion of this project.
+- Under the DF Sidebar, click on the **gear icon** to call up your Agent settings
+- Select the **General Tab** and ensure API Version is set to **V2 API**
