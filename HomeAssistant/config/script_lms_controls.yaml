@@ -1,56 +1,88 @@
-### lms_control script: - Logitech Media Server primary control script for use with Google Dialog Flow project "LMS Controls"
+###  Last Edit:  July 27, 2018
+###  lms_control script: - Logitech Media Server primary control script for use with Google Dialog Flow project "LMS Controls"
 ###     - sets the variables from google dialog flow
 ###     - calls up the proper LMS control subscript based on intentName from google dialog flow project
+###
+
 lms_control:
   alias:  'LMS Controls for use with Google Dialog Flow'
   sequence:
-###  Set variables coming from dialog flow, unused variables will be set to blank 
+###  Set variables coming from dialog flow, unused variables will be set to blank where applicable
+# Set intent
     - service: input_text.set_value
       data_template:
         entity_id: input_text.lms_command_intent
         value: "{{queryResult.intent.displayName}}"
+# Set player
     - service: input_select.select_option
       data_template:
         entity_id: input_select.lms_player
         option: "{{queryResult.parameters.lms_player}}"
+# Set source (filter for empty)
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{queryResult.parameters.lms_source}}"
     - service: input_select.select_option
       data_template:
         entity_id: input_select.lms_source
-        value: "{{queryResult.parameters.lms_source}}"
+        option: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_source.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+# Set shuffle
     - service_template: >
              {% if queryResult.parameters.lms_shuffle == "on" %} input_boolean.turn_on
              {% else %} input_boolean.turn_off
              {% endif %}
       entity_id: input_boolean.lms_shuffle
+# Set Repeat
     - service_template: >
              {% if queryResult.parameters.lms_repeat == "on" %} input_boolean.turn_on
              {% else %} input_boolean.turn_off
              {% endif %}
       entity_id: input_boolean.lms_repeat
+# Set artist
     - service: input_text.set_value
       data_template:
         entity_id: input_text.lms_artist
         value: "{{queryResult.parameters.lms_artist}}"
+# Set album
     - service: input_text.set_value
       data_template:
         entity_id: input_text.lms_album
         value: "{{queryResult.parameters.lms_album}}"
+# Set song
     - service: input_text.set_value
       data_template:
         entity_id: input_text.lms_song
         value: "{{queryResult.parameters.lms_song}}"
+# Set playlist
     - service: input_text.set_value
       data_template:
         entity_id: input_text.lms_playlist
         value: "{{queryResult.parameters.lms_playlist}}"
-    - service: input_number.set_value
+# Set volume (filter for empty)
+    - service: input_text.set_value
       data_template:
-        entity_id: input_number.lms_volume
+        entity_id: input_text.lms_p3
         value: "{{queryResult.parameters.lms_volume}}"
     - service: input_number.set_value
       data_template:
-        entity_id: input_number.lms_sleep_time
+        entity_id: input_number.lms_volume
+        value: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_number.lms_volume.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+# Set sleep time (filter for empty)
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
         value: "{{queryResult.parameters.lms_sleep_time}}"
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.lms_sleep_time
+        value: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_number.lms_sleep_time.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
 
 
 ### check lms_command and call appropriate script
@@ -97,8 +129,14 @@ lms_control:
               script.lms_cmd_add_playlist_spot
             {% elif (queryResult.intent.displayName == "play_radio") %}
               script.lms_cmd_play_radio
+            {% else %}
+              script.lms_do_nothing
             {% endif %}
 
+lms_do_nothing:
+  alias:  "LMS command to play LMS song"
+  sequence:
+    - delay: 00:00:01
 
 lms_cmd_play_song:
   alias:  "LMS command to play LMS song"
@@ -399,4 +437,4 @@ lms_cmd_play_radio:
 
 
 ###     This concludes the section that is associated with LMS Controls application
-###     associated with Google Dialog Flow project "LMS Controls"
+###     associated with Google Dialog Flow project "LMS Commander"
