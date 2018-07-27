@@ -63,7 +63,9 @@ uri is: spotify:album:1zcm3UvHNHpseYOUfd0pna
 ```
 In this case the query returned the album **uri link: spotify:album:1zcm3UvHNHpseYOUfd0pna** and posted that reult to sensor.spotify.uri for later use in the add or play spotify album script.
 
-**_DialogFlow_**
+
+**_DialogFlow:_**
+
 Here's a few tips and things to check in the DialogFlow portion of this project.
 - Under the DF Sidebar, click on the **gear icon** to call up your Agent settings
 - Select the **General Tab** and ensure API Version is set to **V2 API**
