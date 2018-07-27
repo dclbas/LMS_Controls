@@ -54,7 +54,7 @@ Read the README.md in each software directory for the details.  Nothing here is 
 ![Alt text](/HA_LMS_GUI.jpg?raw=true "Lovelace Based GUI") ![Alt text](/HA_LMS_GUI_STD.jpg?raw=true "Traditional GUI")
 
 ## Troubleshooting:
-See the following link for some bvasic troubleshooting tips [troubleshooting.md](https://github.com/ynot123/LMS_Controls/blob/master/troubleshooting.md)\
+See the following link for some basic troubleshooting tips [troubleshooting.md](https://github.com/ynot123/LMS_Controls/blob/master/troubleshooting.md)
 ## Some Useful Links:
 [Logitech Squeezebox Server](https://mysqueezebox.com/index/Home)\
 Wonderful full featured media server supporting tons of features, almost all protocols, most music sources, allowing you to listening to what you want, where you want throughout your home on one or many players at the same time.
