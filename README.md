@@ -17,6 +17,10 @@ Allows voice control for your Logitech Media Server (LMS) from Google Home (GH) 
 	- Pause and re-start players
 - A web GUI front-end for the query tool is also included for use inside Home Assistant
 - Using HA you can further enhance the LMS tools to create home automation scenes (ie: play your favorite radio station when you get home, turn down the lights when listening to music
+
+**_In The Near Future:_**
+- Implementation of Implicit Intents:  `Hey Google ask LMS Controls to play album Dark Side of the Moon by Pink Floyd in the kitchen`
+- HA GUI update to allow linking of players
   
 ## Basic Approach:
 The basic approach is as follows:
