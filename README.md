@@ -55,7 +55,9 @@ To make this work, you need the following:
 Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
 	
 ## Home Assistant GUIs for LMS Player Controls Tool
-![Alt text](/HA_LMS_GUI.jpg?raw=true "Lovelace Based GUI") ![Alt text](/HA_LMS_GUI_STD.jpg?raw=true "Traditional GUI")
+![Alt text](/HA_LMS_GUI.jpg | width=200 "Lovelace Based GUI") ![Alt text](/HA_LMS_GUI_STD.jpg?raw=true | width=200 "Traditional GUI")
+
+
 
 ## Troubleshooting:
 See the following link for some basic troubleshooting tips [troubleshooting.md](https://github.com/ynot123/LMS_Controls/blob/master/troubleshooting.md)
