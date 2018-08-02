@@ -1,3 +1,12 @@
+## Updated Release - Aug 2, 2018
+New Features and addtions include:
+
+- Implicit Intents `Hey Googe, Ask LMS Controls to play artist Pink Floyd in the kitchen`
+- Updated HA GUI to include syncing of squeezebox players
+- Streamlined DF dialog requirements
+- Defaults (context) is now based on HA GUI values rather than coded in DF (ie: current plyer, current source)
+- Streamlined the HA code, increased the use of automations to enhance GUI functionality
+	
 ## LMS Controls
 Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH). A little [audio demo](https://github.com/ynot123/LMS_Controls/blob/master/LMS%20Controls%20Demo.mp3) is available.  Also see the Home Assistant GUI below.
 
@@ -17,10 +26,6 @@ Allows voice control for your Logitech Media Server (LMS) from Google Home (GH) 
 	- Pause and re-start players
 - A HA GUI front-end for the query tool is also included for use inside Home Assistant
 - Using HA you can further enhance the LMS tools to create home automation scenes (ie: play your favorite radio station when you get home, turn down the lights when listening to music
-
-**_In The Near Future:_**
-- Implementation of Implicit Intents:  `Hey Google ask LMS Controls to play album Dark Side of the Moon by Pink Floyd in the kitchen`
-- HA GUI update to allow linking of players
   
 ## Basic Approach:
 The basic approach is as follows:
@@ -37,8 +42,9 @@ The basic approach is as follows:
 		- Shell scripts return the desired link(s) based on the above query paramters
 		- The returned links are then queued to the proper player using HA's Logitech Squeezebox component
 	- If this a set function (volume, shuffle, repeat) Home Assistant simply sets the value using the Media Control or Logitech Squeezebox component as required
-	- The HA package also contains a Lovelace based front-end to perform the same functions as the GH voice system provides
+	- The HA package also contains a Lovelace and Traditional GUI front-end to perform the same functions as the GH voice system provides
 	- In addition, HA allows automation routine extensions to the LMS system.  These can include:
+		- Synchronize squeeze players **new**
 		- Launch favorite audio when you get home
 		- Automatic setting of scenes when players start playing (ie: dim the lights, switch on certain outlets)
 		- Paging / general announcements throughout the home 
