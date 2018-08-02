@@ -31,15 +31,23 @@ Implicit intents is a voice command given to the google environment directly as 
   - "Set volume to 30" or "Set volume to 50 in the kitchen"
   - "Set sleep timer to 30 minutes" or "Set sleep timer to 45 minutes in the bedroom"
   - "Set shuffle on" or "Set shuffle off in the kitchen"
-  - "Set repeat on" or "Set repeat off in the mediaroom
+  - "Set repeat on" or "Set repeat off in the mediaroom"
   - "Set player to the garage"
   - "Set music source to lms" or "Set music source to Spotify" or "set music source to local" - local and lms are the same
 - **Help** intent, gives basic help for the LMS Controls app.
   - "Help"
 - **Sample commands** intent, gives a detailed list of sample commands.
   - "Sample commands"
+- **Version** intent, gives the DialogFlow verison number forthe LMS Conrol app.
+  - "Version"
+- **Finished** intent, is the exit intent.  It ends the conversation, closes the app and returns control to google.  You can quit the app at anytime by saying:
+  - "Goodbye" or "Cancel"
 
-
-
-  
 **Note:**  When items are lef out of the command (ie: player name, music source, etc..) LMS Controls uses the current value in the HA GUI to fill in.  If the item is critical, LMS Controls will prompt for it.
+## Example Implicit Intent Commands
+**Start-Up Phrases:** are used to call up the app for Google Home or Google Assistant and prepare for explicit intents.
+  - "Hey google, ask to LMS Controls to [inset and explicit intent (as outlined above) here]"
+Provided your implicit intent was understood google will call up the LMS Controls app and issue your intent directly without asking "How can I help?"
+
+**Implicit Intents:** After the start-up phrase above, the LMS Controls apps is called up and the Welcome intent is played **"How can I help?"**. Now you are ready to issue the explicit intents (voice commands) to your players. Some example phrases are listed below by category.
+- **Play** intents are structured as follows:  "Play [artist, album, song, playlist, radio] [name / title] using player [player name] with shuffle [on/off]".  The phrase "using player" can be substituted with "in the" for simplicity though accuracy may suffer a bit.  
