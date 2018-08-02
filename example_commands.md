@@ -11,11 +11,12 @@ Implicit intents is a voice command given to the google environment directly as 
   - "OK google, ask for LMS Controls"
 
 **Explicit Intents:** After the start-up phrase above, the LMS Controls apps is called up and the Welcome intent is played **"How can I help?"**. Now you are ready to issue the explicit intents (voice commands) to your players. Some example phrases are listed below by category.
-- **Play** intents are structured as follows:  "Play [artist, album, song or playlist] [name / title] using player [player name] with shuffle [on/off]".  The phrase "using player" can be substituted with "in the" for simplicity though accuracy may suffer a bit.  The "Play" command clears the existing queue of the player, loads the request and starts playing.
+- **Play** intents are structured as follows:  "Play [artist, album, song, playlist, radio] [name / title] using player [player name] with shuffle [on/off]".  The phrase "using player" can be substituted with "in the" for simplicity though accuracy may suffer a bit.  The "Play" command clears the existing queue of the player, loads the request and starts playing.
   - "Play artist Pink Floyd" or "Play artist Pink Floyd in the kitchen" or "Play artist Pink Floyd with shuffle on" or Play artist Pink Floyd in the kitchen with shuffle on"
   - "Play album Breakfast in America" or "Play album Crime of the Century by Supertramp" or Play ablum Pieces of Eight by Supertramp in the mediaroom with shuffle on"
   - "Play song Centerfold using player kitchen" or "Play song Dog and Butterfly by Heart".
   - "Play playlist Smooth Jazz" or "Play playlist classic rock in the garage with shuffle on"
+  - "Play radio station Q92" or "Play radio station CBC in the bedroom"
 - **Add** intents are structure exactly the same as the play intents. "Add [artist, album, song or playlist] [name / title] using player [player name] with shuffle [on/off]".  The "Add" command adds the request to the existing queue of the player.  If the plyer is idle, ith will remain idle thoug items will be added ot the queue.
   - "Add artist Don Henley" or "Add album Ripcord by Keith Urban in the mediaroom with shuffle on"
 - **Pause** intent, pauses the named player.
@@ -24,6 +25,20 @@ Implicit intents is a voice command given to the google environment directly as 
   - "Re-start player" or "Start the mediaroom"
 - **Next track** intent, skips to the next track of the named player.
   - "Next track" or "Next track in the mediaroom"
+- **Pause** intent, pauses the named player.
+  - "Pause player" or "Pause the mediaroom" or "Pause the kitchen"
+- **Set** intents are structured as follows:  "Set [volume, sleep timer, shuffle, repeat, player, source] to [value, time, on / off, player name, music source]". The set command values get stored in HA and are used as defaults unless specified directly in the intent.
+  - "Set volume to 30" or "Set volume to 50 in the kitchen"
+  - "Set sleep timer to 30 minutes" or "Set sleep timer to 45 minutes in the bedroom"
+  - "Set shuffle on" or "Set shuffle off in the kitchen"
+  - "Set repeat on" or "Set repeat off in the mediaroom
+  - "Set player to the garage"
+  - "Set music source to lms" or "Set music source to Spotify" or "set music source to local" - local and lms are the same
+- **Help** intent, gives basic help for the LMS Controls app.
+  - "Help"
+- **Sample commands** intent, gives a detailed list of sample commands.
+  - "Sample commands"
+
 
 
   
