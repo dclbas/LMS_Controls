@@ -11,9 +11,20 @@ Implicit intents is a voice command given to the google environment directly as 
   - "OK google, ask for LMS Controls"
 
 **Explicit Intents:** After the start-up phrase above, the LMS Controls apps is called up and the Welcome intent is played **"How can I help?"**. Now you are ready to issue the explicit intents (voice commands) to your players. Some example phrases are listed below by category.
-- **Play** intents are structured as follows:  "Play [artist, album, song or playlist] [name / title] using player [player name] with shuffle [on/off]".  The phrase "using player" can be substituted with "in the" for simplicity though accuracy may suffer a bit.
+- **Play** intents are structured as follows:  "Play [artist, album, song or playlist] [name / title] using player [player name] with shuffle [on/off]".  The phrase "using player" can be substituted with "in the" for simplicity though accuracy may suffer a bit.  The "Play" command clears the existing queue of the player, loads the request and starts playing.
   - "Play artist Pink Floyd" or "Play artist Pink Floyd in the kitchen" or "Play artist Pink Floyd with shuffle on" or Play artist Pink Floyd in the kitchen with shuffle on"
   - "Play album Breakfast in America" or "Play album Crime of the Century by Supertramp" or Play ablum Pieces of Eight by Supertramp in the mediaroom with shuffle on"
-  
+  - "Play song Centerfold using player kitchen" or "Play song Dog and Butterfly by Heart".
+  - "Play playlist Smooth Jazz" or "Play playlist classic rock in the garage with shuffle on"
+- **Add** intents are structure exactly the same as the play intents. "Add [artist, album, song or playlist] [name / title] using player [player name] with shuffle [on/off]".  The "Add" command adds the request to the existing queue of the player.  If the plyer is idle, ith will remain idle thoug items will be added ot the queue.
+  - "Add artist Don Henley" or "Add album Ripcord by Keith Urban in the mediaroom with shuffle on"
+- **Pause** intent, pauses the named player.
+  - "Pause player" or "Pause the mediaroom" or "Pause the kitchen"
+- **Re-start** intent, starts or re-starts a paused player.
+  - "Re-start player" or "Start the mediaroom"
+- **Next track** intent, skips to the next track of the named player.
+  - "Next track" or "Next track in the mediaroom"
 
+
+  
 **Note:**  When items are lef out of the command (ie: player name, music source, etc..) LMS Controls uses the current value in the HA GUI to fill in.  If the item is critical, LMS Controls will prompt for it.
