@@ -31,6 +31,25 @@ input_boolean:
   lms_repeat:
     name: Repeat
     icon: mdi:repeat
+## Upto 5 players can be defined for sync
+## name: must match the media_player."player name"
+  lms_player1_sync:
+    name: mediaroom
+    icon: mdi:cast
+  lms_player2_sync:
+    name: kitchen
+    icon: mdi:cast
+  lms_player3_sync:
+    name: garage
+    icon: mdi:cast
+  lms_player4_sync:
+    name: familyroom
+    icon: mdi:cast
+  lms_player5_sync:
+    name: googlehome
+    icon: mdi:cast
+
+
 
 
 input_select:
@@ -42,20 +61,16 @@ input_select:
       - add artist
       - add playlist
       - add song
-#      - next track
       - play album
       - play artist
       - play playlist
       - play song
-#      - player pause
-#      - player restart
     icon: mdi:run-fast
   lms_source:
     name: Music Source
     options:
       - spotify
       - lms
-    initial: spotify
     icon: mdi:library
   lms_player:
     name: Media Player Name
@@ -67,7 +82,20 @@ input_select:
       - googlehome
       - googlemini_1
       - googlemini_2
-    icon: mdi:cast
+    icon: mdi:cast-connected
+  lms_sync_master:
+    name: Master Player (Sync Source)
+    options:
+      - mediaroom
+      - kitchen
+      - garage
+      - familyroom
+      - googlehome
+      - googlemini_1
+      - googlemini_2
+    icon: mdi:cast-connected
+
+
 
 input_text:
   lms_artist:
@@ -94,3 +122,4 @@ input_text:
     name: Parameter 2
   lms_p3:
     name: Parameter 3
+    max: 500

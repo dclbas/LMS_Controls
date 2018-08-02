@@ -7,7 +7,7 @@ b64=`echo -n "$auth"|base64`
 b64=$(echo $b64 | tr -d ' ')
 RESULTS=$(curl -X "POST" -H "Authorization: Basic $b64" -d grant_type=client_credentials https://accounts.spotify.com/api/token) 
 token=$(echo $RESULTS | jq -r '.access_token')
-RESULTS=$(curl -X GET "https://api.spotify.com/v1/search?q=$1&type=artist" -H "Authorization: Bearer $token")
+RESULTS=$(curl -X GET "https://api.spotify.com/v1/search?q=$1&type=artist&limit=5" -H "Authorization: Bearer $token")
 echo
 echo the results are: $RESULTS
 echo

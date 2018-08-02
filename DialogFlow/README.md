@@ -13,5 +13,3 @@ In order to get started you need to sign up for an account at the [DialogFlow we
 - Under the DF sidebar, select Entities and choose `@lms_player`.  Update the names and synonyms to reflect your player names and any synonyms you may have for them.
 - Choose `@lms_source` and update the music source entity if required.  At this time, only LMS (local) and Spotify are supported.
 
-**_Intents_** updates:
-- To change the default music source from `spotify` to `lms`, select Intents and choose `Default Welcome Intent`. In the parameters section goto `$lms_source` and find the default value (3 vertical dots). Here you can change the default value from `spotify` to `lms` (if you do not have Spotify), otherwise every time you start the app from google home you will have to day "set source to lms" before you can queue music from the LMS database.

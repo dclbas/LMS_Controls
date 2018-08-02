@@ -1,4 +1,4 @@
-###  Last Edit:  July 27, 2018
+###  Last Edit:  August 1, 2018
 ###  lms_control script: - Logitech Media Server primary control script for use with Google Dialog Flow project "LMS Controls"
 ###     - sets the variables from google dialog flow
 ###     - calls up the proper LMS control subscript based on intentName from google dialog flow project
@@ -7,17 +7,35 @@
 lms_control:
   alias:  'LMS Controls for use with Google Dialog Flow'
   sequence:
-###  Set variables coming from dialog flow, unused variables will be set to blank where applicable
-# Set intent
+
+###  The following can be used to create a notification in HA to show your voice command JSON from DialogFlow
+###  Note: in configuration.yaml the input_text for lms_p3 needs to have max:500 entry to accomodate the size of some commands.
+#    - service: input_text.set_value
+#      data_template:
+#        entity_id: input_text.lms_p3
+#        value: "{{queryResult.parameters}}"
+#    - service: persistent_notification.create
+#      data:
+#            message: "{{states.input_text.lms_p3.state}}"
+#            title: "Voice Command"
+
+
+# Set intent lms_command
     - service: input_text.set_value
       data_template:
         entity_id: input_text.lms_command_intent
-        value: "{{queryResult.intent.displayName}}"
+        value: "{{queryResult.parameters.lms_command}}"
 # Set player
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{queryResult.parameters.lms_player}}"
     - service: input_select.select_option
       data_template:
         entity_id: input_select.lms_player
-        option: "{{queryResult.parameters.lms_player}}"
+        option: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_player.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
 # Set source (filter for empty)
     - service: input_text.set_value
       data_template:
@@ -30,15 +48,27 @@ lms_control:
             {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_source.state}}
             {% else %} {{states.input_text.lms_p3.state}} {% endif %}
 # Set shuffle
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{queryResult.parameters.lms_shuffle}}"
     - service_template: >
-             {% if queryResult.parameters.lms_shuffle == "on" %} input_boolean.turn_on
-             {% else %} input_boolean.turn_off
+             {% if ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_shuffle.state == "on")) %} input_boolean.turn_on
+             {% elif ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_shuffle.state == "off")) %} input_boolean.turn_off
+             {% elif (states.input_text.lms_p3.state == 'on') %} input_boolean.turn_on
+             {% elif (states.input_text.lms_p3.state == 'off') %} input_boolean.turn_off
              {% endif %}
       entity_id: input_boolean.lms_shuffle
 # Set Repeat
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{queryResult.parameters.lms_repeat}}"
     - service_template: >
-             {% if queryResult.parameters.lms_repeat == "on" %} input_boolean.turn_on
-             {% else %} input_boolean.turn_off
+             {% if ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_repeat.state == "on")) %} input_boolean.turn_on
+             {% elif ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_repeat.state == "off")) %} input_boolean.turn_off
+             {% elif (states.input_text.lms_p3.state == 'on') %} input_boolean.turn_on
+             {% elif (states.input_text.lms_p3.state == 'off') %} input_boolean.turn_off
              {% endif %}
       entity_id: input_boolean.lms_repeat
 # Set artist
@@ -89,45 +119,45 @@ lms_control:
     - service: script.turn_on
       data_template:
         entity_id: >-
-            {% if (queryResult.intent.displayName == "next_track") %}
+            {% if (queryResult.parameters.lms_command == "next track") %}
               script.lms_cmd_next_track
-            {% elif (queryResult.intent.displayName == "pause_player") %}
+            {% elif (queryResult.parameters.lms_command == "pause player") %}
               script.lms_cmd_pause_player
-            {% elif (queryResult.intent.displayName == "start_player") %}
+            {% elif (queryResult.parameters.lms_command == "start player") %}
               script.lms_cmd_start_player
-            {% elif ((queryResult.intent.displayName == "play_song") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "play song") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_play_song
-            {% elif ((queryResult.intent.displayName == "play_song") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "play song") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_play_song_spot  
-            {% elif ((queryResult.intent.displayName == "play_playlist") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "play playlist") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_play_playlist
-            {% elif ((queryResult.intent.displayName == "play_playlist") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "play playlist") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_play_playlist_spot
-            {% elif ((queryResult.intent.displayName == "play_artist") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "play artist") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_play_artist
-            {% elif ((queryResult.intent.displayName == "play_artist") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "play artist") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_play_artist_spot
-            {% elif ((queryResult.intent.displayName == "play_album") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "play album") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_play_album
-            {% elif ((queryResult.intent.displayName == "play_album") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "play album") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_play_album_spot
-            {% elif ((queryResult.intent.displayName == "add_album") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "add album") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_add_album
-            {% elif ((queryResult.intent.displayName == "add_album") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "add album") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_add_album_spot
-            {% elif ((queryResult.intent.displayName == "add_artist") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "add artist") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_add_artist
-            {% elif ((queryResult.intent.displayName == "add_artist") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "add artist") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_add_artist_spot
-            {% elif ((queryResult.intent.displayName == "add_song") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "add song") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_add_song
-            {% elif ((queryResult.intent.displayName == "add_song") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "add song") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_add_song_spot
-            {% elif ((queryResult.intent.displayName == "add_playlist") and (queryResult.parameters.lms_source == "lms")) %}
+            {% elif ((queryResult.parameters.lms_command == "add playlist") and (states.input_select.lms_source.state == "lms")) %}
               script.lms_cmd_add_playlist
-            {% elif ((queryResult.intent.displayName == "add_playlist") and (queryResult.parameters.lms_source == "spotify")) %}
+            {% elif ((queryResult.parameters.lms_command == "add playlist") and (states.input_select.lms_source.state == "spotify")) %}
               script.lms_cmd_add_playlist_spot
-            {% elif (queryResult.intent.displayName == "play_radio") %}
+            {% elif (queryResult.parameters.lms_command == "play radio") %}
               script.lms_cmd_play_radio
             {% else %}
               script.lms_do_nothing

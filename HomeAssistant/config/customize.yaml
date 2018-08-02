@@ -1,0 +1,38 @@
+    script.lms_cmd_next_track:
+      icon: mdi:skip-next
+    script.lms_cmd_pause_player:
+      icon: mdi:pause
+    script.lms_cmd_start_player:
+      icon: mdi:play
+    media_player.familyroom:
+      name: Family Room
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false
+    media_player.garage:
+      name: Garage
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false
+    media_player.googlehome:
+      name: Google Home
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false
+    media_player.googlemini_1:
+      name: Google Mini 1
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false
+    media_player.googlemini_2:
+      name: Google Mini 2
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false
+    media_player.kitchen:
+      name: Kitchen
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false
+    media_player.masterbedroom:
+      name: Master Bedroom
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false
+    media_player.mediaroom:
+      name: Media Room
+      playerid: xx:xx:xx:xx:xx:xx
+      sync_stat: false

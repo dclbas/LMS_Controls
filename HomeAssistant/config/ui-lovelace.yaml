@@ -7,6 +7,7 @@ views:
     - title: Main
       # Optional unique id for direct access /lovelace/${id}
       id: Main
+#      theme: midnight
       # The cards to show on this view.
       cards:
         - type: vertical-stack
@@ -45,3 +46,13 @@ views:
                  - entity: input_boolean.lms_repeat
                    tap_action: toggle
 
+        - type: entities
+          title: LMS Sync Controls
+          show_header_toggle: true
+          entities:
+            - input_select.lms_sync_master
+            - input_boolean.lms_player1_sync
+            - input_boolean.lms_player2_sync
+            - input_boolean.lms_player3_sync
+            - input_boolean.lms_player4_sync
+            - input_boolean.lms_player5_sync

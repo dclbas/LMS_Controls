@@ -1,5 +1,5 @@
   my_player:
-    name: LMS Music Player Control
+    name: LMS Music Player Controls
     entities:
     - input_select.lms_player
     - input_number.lms_volume
@@ -15,3 +15,13 @@
     - script.lms_cmd_next_track
     - input_boolean.lms_shuffle
     - input_boolean.lms_repeat
+
+  lms_sync_players:
+    name: List of Sync Players
+    entities:
+    - input_select.lms_sync_master
+    - input_boolean.lms_player1_sync
+    - input_boolean.lms_player2_sync
+    - input_boolean.lms_player3_sync
+    - input_boolean.lms_player4_sync
+    - input_boolean.lms_player5_sync

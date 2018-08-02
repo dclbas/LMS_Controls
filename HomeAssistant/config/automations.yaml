@@ -1,3 +1,7 @@
+### Last Modified Date:  Aug 2, 2018
+### The following automations are associated with the LMS controls applications and GUI
+### They are used to control squeezebox players
+
 # LMS GUI Volume control
   - alias: "LMS GUI Volume Control"
     initial_state: true
@@ -76,8 +80,12 @@
                 script.lms_cmd_play_playlist
             {% else %}
                 script.lms_cmd_play_playlist_spot
-            {% endif %}          
-
+            {% endif %}
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
 # LMS GUI Command for add playlist
   - alias: "LMS GUI Add Playlist Command"
@@ -95,6 +103,11 @@
             {% else %}
                 script.lms_cmd_add_playlist_spot
             {% endif %}          
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
       
 # LMS GUI Command for play artist
@@ -113,6 +126,11 @@
             {% else %}
                 script.lms_cmd_play_artist_spot
             {% endif %}          
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
 
 # LMS GUI Command for add artist
@@ -131,6 +149,11 @@
             {% else %}
                 script.lms_cmd_add_artist_spot
             {% endif %}          
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
 
 # LMS GUI Command for play album
@@ -149,6 +172,11 @@
             {% else %}
                 script.lms_cmd_play_album_spot
             {% endif %}          
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
 
 # LMS GUI Command for add album
@@ -167,6 +195,11 @@
             {% else %}
                 script.lms_cmd_add_album_spot
             {% endif %}          
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
 
 # LMS GUI Command for play song
@@ -185,6 +218,11 @@
             {% else %}
                 script.lms_cmd_play_song_spot
             {% endif %}          
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
 
 # LMS GUI Command for add song
@@ -203,6 +241,11 @@
             {% else %}
                 script.lms_cmd_add_song_spot
             {% endif %}          
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_command
+        option: "__________________"
 
 
 # LMS GUI Command for next track
@@ -240,3 +283,149 @@
     - service: script.turn_on
       data_template:
         entity_id: script.lms_cmd_start_player
+
+# LMS GUI Master Sync Controls 
+  - alias: "LMS GUI Add Song Command"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_select.lms_sync_master
+    action:
+    - service: input_boolean.turn_off
+      data_template:
+        entity_id: group.lms_sync_players
+
+# LMS GUI Player_1 Sync Controls - on
+  - alias: "LMS GUI Player 1 Sync Controls - ON"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player1_sync
+      to: "on"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_sync_master.state}}"
+        command: "sync"
+        parameters: ['{{ state_attr("media_player." + states.input_boolean.lms_player1_sync.name, "playerid") }}']
+# LMS GUI Player_1 Sync Controls - off
+  - alias: "LMS GUI Player 1 Sync Controls - OFF"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player1_sync
+      to: "off"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: media_player.{{states.input_boolean.lms_player1_sync.name}}
+        command: "sync"
+        parameters: ["-"]
+
+# LMS GUI Player_2 Sync Controls - on
+  - alias: "LMS GUI Player 2 Sync Controls - ON"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player2_sync
+      to: "on"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_sync_master.state}}"
+        command: "sync"
+        parameters: ['{{ state_attr("media_player." + states.input_boolean.lms_player2_sync.name, "playerid") }}']
+# LMS GUI Player_2 Sync Controls - off
+  - alias: "LMS GUI Player 2 Sync Controls - OFF"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player2_sync
+      to: "off"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: media_player.{{states.input_boolean.lms_player2_sync.name}}
+        command: "sync"
+        parameters: ["-"]
+
+# LMS GUI Player_3 Sync Controls - on
+  - alias: "LMS GUI Player 3 Sync Controls - ON"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player3_sync
+      to: "on"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_sync_master.state}}"
+        command: "sync"
+        parameters: ['{{ state_attr("media_player." + states.input_boolean.lms_player3_sync.name, "playerid") }}']
+# LMS GUI Player_3 Sync Controls - off
+  - alias: "LMS GUI Player 3 Sync Controls - OFF"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player3_sync
+      to: "off"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: media_player.{{states.input_boolean.lms_player3_sync.name}}
+        command: "sync"
+        parameters: ["-"]
+        
+# LMS GUI Player_4 Sync Controls - on
+  - alias: "LMS GUI Player 4 Sync Controls - ON"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player4_sync
+      to: "on"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_sync_master.state}}"
+        command: "sync"
+        parameters: ['{{ state_attr("media_player." + states.input_boolean.lms_player4_sync.name, "playerid") }}']
+# LMS GUI Player_4 Sync Controls - off
+  - alias: "LMS GUI Player 4 Sync Controls - OFF"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player4_sync
+      to: "off"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: media_player.{{states.input_boolean.lms_player4_sync.name}}
+        command: "sync"
+        parameters: ["-"]
+        
+# LMS GUI Player_5 Sync Controls - on
+  - alias: "LMS GUI Player 5 Sync Controls - ON"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player5_sync
+      to: "on"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: "media_player.{{states.input_select.lms_sync_master.state}}"
+        command: "sync"
+        parameters: ['{{ state_attr("media_player." + states.input_boolean.lms_player5_sync.name, "playerid") }}']
+# LMS GUI Player_5 Sync Controls - off
+  - alias: "LMS GUI Player 5 Sync Controls - OFF"
+    initial_state: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.lms_player5_sync
+      to: "off"
+    action:
+    - service:  media_player.squeezebox_call_method
+      data_template:
+        entity_id: media_player.{{states.input_boolean.lms_player5_sync.name}}
+        command: "sync"
+        parameters: ["-"]
