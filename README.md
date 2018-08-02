@@ -74,7 +74,7 @@ Where music meets code. Exposes powerful APIs, SDKs and widgets for integration 
 
 ## Our Support Communities:
 [Squeezebox Community Forums](https://forums.slimdevices.com/)\
-Anything you need to know about your LMS server is here.  
+Anything you need to know about your LMS server is here.   
 
 [Home Assistant Community Forums](https://community.home-assistant.io/)\
 All about Home Assistant.  Lots of development and support going on here.  
