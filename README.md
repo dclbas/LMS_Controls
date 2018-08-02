@@ -56,7 +56,9 @@ Read the README.md in each software directory for the details.  Nothing here is 
 	
 ## Home Assistant GUIs for LMS Player Controls Tool
 
-<img src="https://github.com/ynot123/LMS_Controls/blob/master/HA_LMS_GUI.jpg" alt="Lovelace Based GUI" width="450px"/> <img src="https://github.com/ynot123/LMS_Controls/blob/master/HA_LMS_GUI_STD.jpg" alt="Traditional GUI" width="400px"/>
+**Lovelace GUI** on the left and **Traditional HA GUI** on the right:
+
+<img src="https://github.com/ynot123/LMS_Controls/blob/master/HA_LMS_GUI.jpg" alt="Lovelace Based GUI" width="450px"/> <img src="https://github.com/ynot123/LMS_Controls/blob/master/HA_LMS_GUI_STD.jpg" alt="Traditional GUI" width="402px"/>
 
 
 
