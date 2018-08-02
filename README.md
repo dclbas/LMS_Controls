@@ -55,7 +55,12 @@ To make this work, you need the following:
 Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
 	
 ## Home Assistant GUIs for LMS Player Controls Tool
-![Alt text](/HA_LMS_GUI.jpg?raw=true "Lovelace Based GUI") ![Alt text](/HA_LMS_GUI_STD.jpg?raw=true "Traditional GUI")
+
+**Lovelace GUI** on the left and **Traditional HA GUI** on the right:
+
+<img src="https://github.com/ynot123/LMS_Controls/blob/master/HA_LMS_GUI.jpg" alt="Lovelace Based GUI" width="450px"/> <img src="https://github.com/ynot123/LMS_Controls/blob/master/HA_LMS_GUI_STD.jpg" alt="Traditional GUI" width="402px"/>
+
+
 
 ## Troubleshooting:
 See the following link for some basic troubleshooting tips [troubleshooting.md](https://github.com/ynot123/LMS_Controls/blob/master/troubleshooting.md)
@@ -74,7 +79,7 @@ Where music meets code. Exposes powerful APIs, SDKs and widgets for integration 
 
 ## Our Support Communities:
 [Squeezebox Community Forums](https://forums.slimdevices.com/)\
-Anything you need to know about your LMS server is here.  
+Anything you need to know about your LMS server is here.   
 
 [Home Assistant Community Forums](https://community.home-assistant.io/)\
 All about Home Assistant.  Lots of development and support going on here.  
