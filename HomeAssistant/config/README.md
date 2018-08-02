@@ -1,5 +1,5 @@
 ## Home Assistant Config Directory
-The files in this directory and sub-directories are required.  Only the entries pertinenet to this application are shown.  For example the configuration.yaml file only shows the additional entries required for this application (mainly input_boolean, input_select, input_text, etc..)
+The files in this directory and sub-directories are required.  Only the entries pertinent to this application are shown.  For example the configuration.yaml file only shows the additional entries required for this application (mainly input_boolean, input_select, input_text, etc..)
 In short you need to add these entries to your existing configuration.yaml, scripts files, etc. as required.
 
 ## Modifications Required
@@ -14,6 +14,9 @@ The following files need to be edited to add your personal acess keys, secrets, 
     - **_input_number, input_boolean, input_select, input_text_** components:
       - Input variables required for the application
       - **_lms_player_** input_select entry needs to be modified to reflect the friendly name of your existing LMS players
+      - **_lms_sync_master_** input_select entry needs to be modified to reflect the friendly name of your existing LMS players
+      - **_lms_playerX_sync_** input_boolean(s) need to be modified to contain the friendly names of the plyers you wish to have as sync destinations (upto 5 are allowed, more will need minor code modifications) 
+      
 - **_automations.yaml_** file:
   - The contents of this file is to be merged into your existing automations.yaml file.  The automation additions include:
     - An entry for each LMS Player Control GUI function.  These include:
