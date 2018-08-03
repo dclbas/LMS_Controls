@@ -12,12 +12,12 @@ Implicit intents is a voice command given to the google environment directly as 
 
 **Explicit Intents:** After the start-up phrase above, the LMS Controls apps is called up and the Welcome intent is played **"How can I help?"**. Now you are ready to issue the explicit intents (voice commands) to your players. Some example phrases are listed below by category.
 - **Play** intents are structured as follows:  "Play [artist, album, song, playlist, radio] [name / title] using player [player name] with shuffle [on/off]".  The phrase "using player" can be substituted with "in the" for simplicity though accuracy may suffer a bit.  The "Play" command clears the existing queue of the player, loads the request and starts playing.
-  - "Play artist Pink Floyd" or "Play artist Pink Floyd in the kitchen" or "Play artist Pink Floyd with shuffle on" or Play artist Pink Floyd in the kitchen with shuffle on"
-  - "Play album Breakfast in America" or "Play album Crime of the Century by Supertramp" or Play ablum Pieces of Eight by Supertramp in the mediaroom with shuffle on"
+  - "Play artist Pink Floyd" or "Play artist Pink Floyd in the kitchen" or "Play artist Pink Floyd with shuffle on" or "Play artist Pink Floyd in the kitchen with shuffle on"
+  - "Play album Breakfast in America" or "Play album Crime of the Century by Supertramp" or "Play ablum Pieces of Eight by Supertramp in the mediaroom with shuffle on"
   - "Play song Centerfold using player kitchen" or "Play song Dog and Butterfly by Heart".
   - "Play playlist Smooth Jazz" or "Play playlist classic rock in the garage with shuffle on"
   - "Play radio station Q92" or "Play radio station CBC in the bedroom"
-- **Add** intents are structure exactly the same as the play intents. "Add [artist, album, song or playlist] [name / title] using player [player name] with shuffle [on/off]".  The "Add" command adds the request to the existing queue of the player.  If the plyer is idle, ith will remain idle thoug items will be added ot the queue.
+- **Add** intents are structure exactly the same as the play intents. "Add [artist, album, song or playlist] [name / title] using player [player name] with shuffle [on/off]".  The "Add" command adds the request to the existing queue of the player.  If the player is idle, it will remain idle even though items will be added ot the queue.
   - "Add artist Don Henley" or "Add album Ripcord by Keith Urban in the mediaroom with shuffle on"
 - **Pause** intent, pauses the named player.
   - "Pause player" or "Pause the mediaroom" or "Pause the kitchen"
@@ -28,12 +28,12 @@ Implicit intents is a voice command given to the google environment directly as 
 - **Pause** intent, pauses the named player.
   - "Pause player" or "Pause the mediaroom" or "Pause the kitchen"
 - **Set** intents are structured as follows:  "Set [volume, sleep timer, shuffle, repeat, player, source] to [value, time, on / off, player name, music source]". The set command values get stored in HA and are used as defaults unless specified directly in the intent.
-  - "Set volume to 30" or "Set volume to 50 in the kitchen" - Volume setting is 0 to 100
-  - "Set sleep timer to 30 minutes" or "Set sleep timer to 45 minutes in the bedroom" - timer setting is 0-60 minutes
+  - "Set volume to 30" or "Set volume to 50 in the kitchen" - Volume range is 0 to 100
+  - "Set sleep timer to 30 minutes" or "Set sleep timer to 45 minutes in the bedroom" - Timer range is 0 to 60 minutes
   - "Set shuffle on" or "Set shuffle off in the kitchen"
   - "Set repeat on" or "Set repeat off in the mediaroom"
   - "Set player to the garage"
-  - "Set music source to lms" or "Set music source to Spotify" or "set music source to local" - local and lms are the same
+  - "Set music source to lms" or "Set music source to Spotify" or "set music source to local" - Sources local and lms are the same
 - **Help** intent, gives basic help for the LMS Controls app.
   - "Help"
 - **Sample commands** intent, gives a detailed list of sample commands.
@@ -43,22 +43,22 @@ Implicit intents is a voice command given to the google environment directly as 
 - **Finished** intent, is the exit intent.  It ends the conversation, closes the app and returns control to google.  You can quit the app at anytime by saying:
   - "Goodbye" or "Cancel"
 
-**Note:**  When items are lef out of the command (ie: player name, music source, etc..) LMS Controls uses the current value in the HA GUI to fill in.  If the item is critical, LMS Controls will prompt for it.
+**Note:**  When items are lef out of the command (ie: player name, music source, etc..) LMS Controls uses the current value in the HA GUI as the default to fill in.  If the item is critical, LMS Controls will prompt for it.
 ## Example Implicit Intent Commands
-**Start-Up Phrase:** is used to call up the app for Google Home or Google Assistant and send the command all in one sentence. The startup phrase is:
+**Start-Up Phrase:** is used to call up the app for Google Home or Google Assistant and send the intent command all in one sentence. The startup phrase is:
 
   - "Hey google, ask to LMS Controls to [insert explicit intent here]"
   
-Provided your implicit intent was understood google will call up the LMS Controls app and issue your intent directly without asking "How can I help?". If the intent was not understood you will get the "How can I help?" prompt and return to explicit mode.
+Provided your implicit intent was understood google will call up the LMS Controls app and issue your intent directly without asking "How can I help?". If the intent was not understood you will get the "How can I help?" prompt and be returned to explicit mode.
 
-After your command has been issued, you have upto 10 seconds to issue any other follow-up explicit intents before the app closes automatically.
+After your command has been issued, you have up to 10 seconds to issue any other follow-up explicit intents before the app closes automatically.
 
-Some examples are:
+Some implcit intent examples are:
   - "Hey google ask LMS Controls to play album 2112 by Rush in the mediaroom with shuffle on"
   - "Hey google ask LMS Controls to set the volume to 50"
   - "Hey google ask LMS Controls to pause player"
 
-## Some Example Conversations Using LMS Controls
+## Here Are Some Example Conversations Using LMS Controls
 - Example #1: Implicit intent followed by several explicit intents
 
       USER	hey google ask LMS Controls to play artist Diana Krall in the media room
@@ -92,5 +92,5 @@ Some examples are:
       USER	play artist rush
       AGENT	Playing artist rush using the current player
       USER	actions_intent_CANCEL
-      AGENT	Goodbye, returning control to google
+      AGENT	Goodbye
     
