@@ -46,14 +46,16 @@ Implicit intents is a voice command given to the google environment directly as 
 **Note:**  When items are lef out of the command (ie: player name, music source, etc..) LMS Controls uses the current value in the HA GUI to fill in.  If the item is critical, LMS Controls will prompt for it.
 ## Example Implicit Intent Commands
 **Start-Up Phrase:** is used to call up the app for Google Home or Google Assistant and send the command all in one sentence. The startup phrase is:
-  - "Hey google, ask to LMS Controls to [insert explicit intent here]"
+    - "Hey google, ask to LMS Controls to [insert explicit intent here]"
   
 Provided your implicit intent was understood google will call up the LMS Controls app and issue your intent directly without asking "How can I help?". If the intent was not understood you will get the "How can I help?" prompt and return to explicit mode.
 
 After your comman has been issued, you have upto 10 seconds to issue any other follow-up explicit intents before the app closes automatically.
 
 Some examples are:
-  - "Hey google ask LMS Controls to play album 2112 by Rush in the mediaroom with shuffle on"
-  - "Hey google ask LMS Controls to set the volume to 50"
-  - "Hey google ask LMS Controls to pause player"
+    - "Hey google ask LMS Controls to play album 2112 by Rush in the mediaroom with shuffle on"
+    - "Hey google ask LMS Controls to set the volume to 50"
+    - "Hey google ask LMS Controls to pause player"
 
+## Some Example Conversations Using LMS Controls
+- Example #1: Implicit Intent followed by several explicit intents
