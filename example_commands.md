@@ -3,7 +3,7 @@ Once setup and configured you can use your Google Home or Google Assistant to is
 ## Explicit Intents
 Explicit intents are the commands given to the app once it's been called up and is active on your Google device.  It's characterized by the startup phrase:  **"Hey google talk to LMS Controls"**.  This calls up the Welcome intent (**"How can I help?"**) of the app at wich time you are free to issue your voice commands.  Once all commands are issued you say **"Goodbye"** (or after 10 seconds of no requests) the App closes and returns control to the Google environment.
 ## Implicit Intents
-Implicit intents is a voice command given to the google environment directly as part of the app start-up command.  It's characterized by the phrase **"Hey google ask LMS Controls to ...**.  This calls up the app, skips the Welcome intent and goes directly to the command issued after the phrase **"ask LMS Controls to...**.  The command is executed and in the LMS application, there is a 10 second pause that allows you to issue further follow-up commands directly (explicit intents) like **"set volume to 40"** or **"set shuffle on"** without having to re-issue the startup phrase.  After 10 seconds of no requests, the app exits and returns control to the google environment.
+Implicit intents is a voice command given to the google environment directly as part of the app start-up command.  It quickly asksk for something to get done without having to step through several prompts.  It's characterized by the phrase **"Hey google ask LMS Controls to ...**.  This calls up the app, skips the Welcome intent and goes directly to the command issued after the phrase **"ask LMS Controls to...**.  The command is executed and in the LMS application, there is a 10 second pause that allows you to issue further follow-up commands directly (explicit intents) like **"set volume to 40"** or **"set shuffle on"** without having to re-issue the startup phrase.  After 10 seconds of no requests, the app exits and returns control to the google environment.
 ## Example Explicit Intent Commands
 **Start-Up Phrases:** are used to call up the app for Google Home or Google Assistant and prepare for explicit intents.
   - "Hey google, talk to LMS Controls"
@@ -28,8 +28,8 @@ Implicit intents is a voice command given to the google environment directly as 
 - **Pause** intent, pauses the named player.
   - "Pause player" or "Pause the mediaroom" or "Pause the kitchen"
 - **Set** intents are structured as follows:  "Set [volume, sleep timer, shuffle, repeat, player, source] to [value, time, on / off, player name, music source]". The set command values get stored in HA and are used as defaults unless specified directly in the intent.
-  - "Set volume to 30" or "Set volume to 50 in the kitchen"
-  - "Set sleep timer to 30 minutes" or "Set sleep timer to 45 minutes in the bedroom"
+  - "Set volume to 30" or "Set volume to 50 in the kitchen" - Volume setting is 0 to 100
+  - "Set sleep timer to 30 minutes" or "Set sleep timer to 45 minutes in the bedroom" - timer setting is 0-60 minutes
   - "Set shuffle on" or "Set shuffle off in the kitchen"
   - "Set repeat on" or "Set repeat off in the mediaroom"
   - "Set player to the garage"
@@ -45,9 +45,15 @@ Implicit intents is a voice command given to the google environment directly as 
 
 **Note:**  When items are lef out of the command (ie: player name, music source, etc..) LMS Controls uses the current value in the HA GUI to fill in.  If the item is critical, LMS Controls will prompt for it.
 ## Example Implicit Intent Commands
-**Start-Up Phrases:** are used to call up the app for Google Home or Google Assistant and prepare for explicit intents.
-  - "Hey google, ask to LMS Controls to [inset and explicit intent (as outlined above) here]"
-Provided your implicit intent was understood google will call up the LMS Controls app and issue your intent directly without asking "How can I help?"
+**Start-Up Phrase:** is used to call up the app for Google Home or Google Assistant and send the command all in one sentence. The startup phrase is:
+  - "Hey google, ask to LMS Controls to [insert explicit intent here]"
+  
+Provided your implicit intent was understood google will call up the LMS Controls app and issue your intent directly without asking "How can I help?". If the intent was not understood you will get the "How can I help?" prompt and return to explicit mode.
 
-**Implicit Intents:** After the start-up phrase above, the LMS Controls apps is called up and the Welcome intent is played **"How can I help?"**. Now you are ready to issue the explicit intents (voice commands) to your players. Some example phrases are listed below by category.
-- **Play** intents are structured as follows:  "Play [artist, album, song, playlist, radio] [name / title] using player [player name] with shuffle [on/off]".  The phrase "using player" can be substituted with "in the" for simplicity though accuracy may suffer a bit.  
+After your comman has been issued, you have upto 10 seconds to issue any other follow-up explicit intents before the app closes automatically.
+
+Some examples are:
+  - "Hey google ask LMS Controls to play album 2112 by Rush in the mediaroom with shuffle on"
+  - "Hey google ask LMS Controls to set the volume to 50"
+  - "Hey google ask LMS Controls to pause player"
+
