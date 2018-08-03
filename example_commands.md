@@ -59,7 +59,7 @@ Some examples are:
   - "Hey google ask LMS Controls to pause player"
 
 ## Some Example Conversations Using LMS Controls
-- Example #1: Implicit Intent followed by several explicit intents
+- Example #1: Implicit intent followed by several explicit intents
 
       USER	hey google ask LMS Controls to play artist Diana Krall in the media room
       AGENT	Playing artist Diana Krall in the mediaroom
@@ -75,3 +75,8 @@ Some examples are:
       AGENT	Setting shuffle on on the current player
       USER	actions_intent_CANCEL
       AGENT	Goodbye, returning control to google
+
+- Example #2: Implicit intent followed by several explicit intents
+
+      USER	hey google ask LMS Controls to play artist Diana Krall in the media room
+      AGENT	Playing artist Diana Krall in the mediaroom
