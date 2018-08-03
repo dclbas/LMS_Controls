@@ -76,7 +76,21 @@ Some examples are:
       USER	actions_intent_CANCEL
       AGENT	Goodbye, returning control to google
 
-- Example #2: Implicit intent followed by several explicit intents
+- Example #2: Implicit intent with no follow up (10 seconds of silence then Goodbye)
 
-      USER	hey google ask LMS Controls to play artist Diana Krall in the media room
-      AGENT	Playing artist Diana Krall in the mediaroom
+      USER	hey google ask LMS Controls to play artist Triumph in the media room
+      AGENT	Playing artist Triumph in the mediaroom
+      USER	actions_intent_CANCEL
+      AGENT	Goodbye, returning control to google
+ 
+- Example #3: Explicit intents only
+
+      USER	Hey google talk to LMS Controls
+      AGENT	How can I help?
+      USER	set music source to spotify
+      AGENT	Setting music source to spotify
+      USER	play artist rush
+      AGENT	Playing artist rush using the current player
+      USER	actions_intent_CANCEL
+      AGENT	Goodbye, returning control to google
+    
