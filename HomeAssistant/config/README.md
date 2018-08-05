@@ -7,7 +7,7 @@ The following files need to be edited to add your personal acess keys, secrets, 
 - **_configuration.yaml_** file:
   - The contents of this file is to be merged into your existing configuration.yaml file.  The additions / changes required are:
     - **_media_player_** component:
-      - Change LMS_Host_IP to your LMS host IP adrress (ie: 192.168.x.x)
+      - Change LMS_Host_IP to your LMS host IP address (ie: 192.168.x.x)
     - **_shell_command_** component:
       - Lists the shell scripts to be used along with the template information required
       - When troubleshooting, you can run these scripts in a shell independently of HA to see the results of your queries
