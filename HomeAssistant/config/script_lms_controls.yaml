@@ -1,4 +1,5 @@
-###  Last Edit:  August 1, 2018
+###  Last Edit:  August 5, 2018
+###         - Added capability to sync / unsync players via dialogflow
 ###  lms_control script: - Logitech Media Server primary control script for use with Google Dialog Flow project "LMS Controls"
 ###     - sets the variables from google dialog flow
 ###     - calls up the proper LMS control subscript based on intentName from google dialog flow project
@@ -114,6 +115,29 @@ lms_control:
             {% if (states.input_text.lms_p3.state == '') %} {{states.input_number.lms_sleep_time.state}}
             {% else %} {{states.input_text.lms_p3.state}} {% endif %}
 
+# Set Master Player
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{queryResult.parameters.lms_master_player}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_sync_master
+        option: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_sync_master.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+
+# Set Sync Player - Uses input_text.lms_p1 so be sure to make this the last set command no to overwrite p1.
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p1
+        value: "{{queryResult.parameters.lms_sync_player}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_sync_player
+        option: >
+            {% if (states.input_text.lms_p1.state == '') %} none
+            {% endif %}
 
 ### check lms_command and call appropriate script
     - service: script.turn_on
@@ -159,6 +183,14 @@ lms_control:
               script.lms_cmd_add_playlist_spot
             {% elif (queryResult.parameters.lms_command == "play radio") %}
               script.lms_cmd_play_radio
+            {% elif (queryResult.parameters.lms_command == "sync one") %}
+              script.lms_cmd_sync_one
+            {% elif (queryResult.parameters.lms_command == "sync all") %}
+              script.lms_cmd_sync_all
+            {% elif (queryResult.parameters.lms_command == "unsync one") %}
+              script.lms_cmd_unsync_one
+            {% elif (queryResult.parameters.lms_command == "unsync all") %}
+              script.lms_cmd_unsync_all
             {% else %}
               script.lms_do_nothing
             {% endif %}
@@ -464,7 +496,53 @@ lms_cmd_play_radio:
         command: playlist
         parameters: ["play",'Radio_{{states.input_text.lms_playlist.state|title|trim|replace(" ","_")}}']
 
+lms_cmd_sync_one:
+  alias: "LMS command to Sync One Player to the Master"
+  sequence:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: >
+            {% if (states.input_boolean.lms_player1_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player1_sync
+            {% elif (states.input_boolean.lms_player2_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player2_sync
+            {% elif (states.input_boolean.lms_player3_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player3_sync
+            {% elif (states.input_boolean.lms_player4_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player4_sync
+            {% elif (states.input_boolean.lms_player5_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player5_sync
+            {% endif %}
 
+lms_cmd_sync_all:
+  alias: "LMS command to Sync All Players to the Master"
+  sequence:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: >
+            {% if (states.input_text.lms_command_intent.state == "sync all") %} 
+                input_boolean.lms_player1_sync, input_boolean.lms_player2_sync, input_boolean.lms_player3_sync, input_boolean.lms_player4_sync, input_boolean.lms_player5_sync
+            {% endif %}
+    
+lms_cmd_unsync_one:
+  alias: "LMS command to Un-Sync One Player from the Master"
+  sequence:
+    - service: input_boolean.turn_off
+      data_template:
+        entity_id: >
+            {% if (states.input_boolean.lms_player1_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player1_sync
+            {% elif (states.input_boolean.lms_player2_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player2_sync
+            {% elif (states.input_boolean.lms_player3_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player3_sync
+            {% elif (states.input_boolean.lms_player4_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player4_sync
+            {% elif (states.input_boolean.lms_player5_sync.name == states.input_text.lms_p1.state) %} input_boolean.lms_player5_sync
+            {% endif %}
+
+lms_cmd_unsync_all:
+  alias: "LMS command to Un-Sync All Players from the Master"
+  sequence:
+    - service: input_boolean.turn_off
+      data_template:
+        entity_id: >
+            {% if (states.input_text.lms_command_intent.state == "unsync all") %} 
+                input_boolean.lms_player1_sync, input_boolean.lms_player2_sync, input_boolean.lms_player3_sync, input_boolean.lms_player4_sync, input_boolean.lms_player5_sync
+            {% endif %}
+  
+  
 
 ###     This concludes the section that is associated with LMS Controls application
 ###     associated with Google Dialog Flow project "LMS Commander"

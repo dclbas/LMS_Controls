@@ -1,3 +1,6 @@
+### Last Edit Aug 5, 2018
+###   - Changed toggle to toggle as required by Lovelace latest update 
+
 title: My Home
 
 excluded_entities:
@@ -27,13 +30,13 @@ views:
               show_state: false
               entities:
                  - entity: script.lms_cmd_pause_player
-                   tap_action: turn-on
+                   tap_action: toggle
                    name: Pause
                  - entity: script.lms_cmd_start_player
-                   tap_action: turn-on
+                   tap_action: toggle
                    name: Play
                  - entity: script.lms_cmd_next_track
-                   tap_action: turn-on
+                   tap_action: toggle
                    name: Next Track
             - type: glance
               column_width: 25%

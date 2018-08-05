@@ -27,6 +27,7 @@ The following files need to be edited to add your personal acess keys, secrets, 
     - Calls the query functions to determine song, album, artist or playlist links from either LMS database or Spotify
     - Adds the links to the selected media player queue using either ADD or PLAY functions
     - Provides Pause, Re-start or Next track functions for selected player
+	- Provides sync and unsync functions from DialogFlow
 - **_shell_** sub-directory:
   - For the files:  qry_alb.sh, qry_alb_song.sh the following modifications are required:
     - Replace `localhost 9090` with `your path to LMS CLI interface & Port#`
