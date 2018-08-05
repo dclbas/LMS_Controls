@@ -34,6 +34,16 @@ Implicit intents is a voice command given to the google environment directly as 
   - "Set repeat on" or "Set repeat off in the mediaroom"
   - "Set player to the garage"
   - "Set music source to lms" or "Set music source to Spotify" or "set music source to local" - Sources local and lms are the same
+- **Sync or Link** intent, provides the ability to synchronize squeezebox players.  The command is structured as follows:  "Sync [player name] to [master player name]". If the [master player name] is ommitted, the player will be synced with the current default master player in HA.  Examples include: .
+  - "Sync the garage to the kitchen" or "Sync the garage"
+  - "Link the garage to the kitchen" or "Link the garage"
+- **Sync All or Link All** intent, provides the ability to synchronize all squeezebox players to the same master.  The command is structured as follows:  "Sync all players to [master player name]". If the [master player name] is ommitted, the players will be synced with the current default master player in HA.  Examples include: .
+  - "Sync all players to the garage" or "Sync all players"
+  - "Link all players to the garage" or "Link all players"
+- **Unsync or Unlink** intent, provides the ability to unsynchronize squeezebox players.  The command is structured as follows:  "Unsync [player name]". Examples include: .
+  - "Unsync the garage" or "Unlink the garage"
+- **Unsync All** intent, provides the ability to unsynchronize all squeezebox players.  The command is structured as follows:  "Unsync [player name]". Examples include: .
+  - "Unsync all players" or "Unlink all players"
 - **Help** intent, gives basic help for the LMS Controls app.
   - "Help"
 - **Sample commands** intent, gives a detailed list of sample commands.
