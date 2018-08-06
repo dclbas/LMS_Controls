@@ -1,4 +1,4 @@
-## LMS Controls
+## LMS Controls:
 Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH). A little [audio demo](https://github.com/ynot123/LMS_Controls/blob/master/LMS%20Controls%20Demo.mp3) is available.  Also see the Home Assistant GUI below.
 
 Some example commands include:
@@ -58,7 +58,7 @@ To make this work, you need the following:
 ## Installation:	
 Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
 	
-## Home Assistant GUIs for LMS Player Controls Tool
+## Home Assistant GUIs for LMS Player Controls Tool:
 
 **Lovelace GUI** on the left and **Traditional HA GUI** on the right:
 
