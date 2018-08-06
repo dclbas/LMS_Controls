@@ -6,7 +6,7 @@ New Features and additions include:
 - Streamlined DF dialog requirements
 - Defaults (context) is now based on HA GUI values rather than coded in DF (ie: current player, current source)
 - Streamlined the HA code, increased the use of automations to enhance GUI functionality
-- Added DF to allow sync / unsync of players using voce commands - **New Aug 5, 2018** 
+- Added DF to allow sync / unsync of players using voice commands - **New Aug 5, 2018** 
 	
 ## LMS Controls
 Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH). A little [audio demo](https://github.com/ynot123/LMS_Controls/blob/master/LMS%20Controls%20Demo.mp3) is available.  Also see the Home Assistant GUI below.
