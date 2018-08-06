@@ -1,16 +1,10 @@
-## Updated Release - Aug 2, 2018
-New Features and additions include:
-
-- Implicit Intents `Hey Googe, Ask LMS Controls to play artist Pink Floyd in the kitchen`
-- Updated HA GUI to include syncing of squeezebox players
-- Streamlined DF dialog requirements
-- Defaults (context) is now based on HA GUI values rather than coded in DF (ie: current player, current source)
-- Streamlined the HA code, increased the use of automations to enhance GUI functionality
-- Added DF to allow sync / unsync of players using voice commands - **New Aug 5, 2018** 
-	
 ## LMS Controls
 Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH). A little [audio demo](https://github.com/ynot123/LMS_Controls/blob/master/LMS%20Controls%20Demo.mp3) is available.  Also see the Home Assistant GUI below.
 
+Some example commands include:
+- "Hey google ask LMS Controls to play album Dog and Butterfly by Heart in the kitchen with shuffle on"
+- "Set volume to 50" or "Set sleep timer to 30 minutes" or "Set shuffle on"
+- "Link the garage with the mediaroom"
 ## What Can It Do:
 Allows voice control for your Logitech Media Server (LMS) from Google Home (GH) or Google Assistant (GA) with Home Assistant (HA) acting as the middle man.  Using these tools, you can do the following:
 
