@@ -13,9 +13,9 @@ The following files need to be edited to add your personal acess keys, secrets, 
       - When troubleshooting, you can run these scripts in a shell independently of HA to see the results of your queries
     - **_input_number, input_boolean, input_select, input_text_** components:
       - Input variables required for the application
-      - **_lms_player_** input_select entry needs to be modified to reflect the friendly name of your existing LMS players
-      - **_lms_sync_master_** input_select entry needs to be modified to reflect the friendly name of your existing LMS players
-      - **_lms_playerX_sync_** input_boolean(s) need to be modified to contain the friendly names of the plyers you wish to have as sync destinations (upto 5 are allowed, more will need minor code modifications) 
+      - **_lms_player_** input_select entry needs to be modified to reflect the entity names (the part after the `media_player.`) of your existing LMS players.  As an example entity `media_player.kitchen` the name would be **kitchen**
+      - **_lms_sync_master_** input_select entry needs to be modified to reflect the entity names of your existing LMS players
+      - **_lms_playerX_sync_** input_boolean(s) need to be modified changing the value of `name:` field to the entity name of the players you wish to have as a sync destination (upto 5 are allowed, more will need minor code modifications) 
       
 - **_automations.yaml_** file:
   - The contents of this file is to be merged into your existing automations.yaml file.  The automation additions include:
