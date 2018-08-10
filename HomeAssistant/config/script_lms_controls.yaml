@@ -196,7 +196,7 @@ lms_control:
             {% endif %}
 
 lms_do_nothing:
-  alias:  "LMS command to play LMS song"
+  alias:  "LMS command to do nothing"
   sequence:
     - delay: 00:00:01
 
