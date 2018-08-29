@@ -1,7 +1,7 @@
 ## LMS Controls:
 Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH). A little [audio demo](https://github.com/ynot123/LMS_Controls/blob/master/LMS%20Controls%20Demo.mp3) is available.  Also see the Home Assistant GUI below.
 
-Some example commands include:
+Some [example](https://github.com/ynot123/LMS_Controls/blob/master/example_commands.md) commands include:
 - "Hey google ask LMS Controls to play album Dog and Butterfly by Heart in the kitchen with shuffle on"
 - "Set volume to 50" or "Set sleep timer to 30 minutes" or "Set shuffle on"
 - "Link the garage with the mediaroom"
