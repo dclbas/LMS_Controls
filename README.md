@@ -53,7 +53,7 @@ To make this work, you need the following:
 - Home Assistant - open source home automation package
 - Google Home (or google assistant)
 - Developer account for Dialogflow for the voice activation part
-- Spotify account with Client_ID and Client_Secret to allow query processing
+- Optional Spotify account with Client_ID and Client_Secret to allow processing of Spotify music source
 
 ## Installation:	
 Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
