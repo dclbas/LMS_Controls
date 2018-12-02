@@ -1,3 +1,10 @@
+## Home Assistant Version 0.83 and Up - API_Password Deprecated
+Please note if you upgrade your Home Assistant installation to version 0.83.2 the use of api_password is no longer supported (as pointed out by @kalimeroo) and your webhooks and shell script authentication will need to change to use long-lived tokens.
+
+I will provide an update on the methods in the GitHub https://github.com/ynot123/LMS_Controls over the next week or two. The change is not very complicated but will require an update in several locations including the shell scripts and DialogFlow webhooks.
+
+Ynot.
+
 ## LMS Controls:
 Control your Logitech / Squeezeserver players (LMS) from Home Assistant (HA) and Google Home (GH). A little [audio demo](https://github.com/ynot123/LMS_Controls/blob/master/LMS%20Controls%20Demo.mp3) is available.  Also see the Home Assistant GUI below.
 
