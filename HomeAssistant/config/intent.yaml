@@ -1,0 +1,217 @@
+###     Intent_scripts used for processing webhooks from DialogFlow (GoogleHome / Assistant)
+###     Rev. 0:     Dec 06, 2018 - Initial intent.yaml development
+
+###  lms_dialog_intent: - Logitech Media Server primary control script for use with Google Dialog Flow project "LMS Controls"
+###     - sets the variables from google dialog flow
+###     - calls up the proper Home Assistant LMS controls subscript based on intentName from google dialog flow project
+###
+  lms_dialog_intent:
+#    speech:
+#      text: Any text here will override the dialogflow default response
+    action:
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_command_intent
+        value: "{{lms_command}}"
+# Set player
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{lms_player}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_player
+        option: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_player.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+# Set source (filter for empty)
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{lms_source}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_source
+        option: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_source.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+# Set shuffle
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{lms_shuffle}}"
+    - service_template: >
+             {% if ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_shuffle.state == "on")) %} input_boolean.turn_on
+             {% elif ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_shuffle.state == "off")) %} input_boolean.turn_off
+             {% elif (states.input_text.lms_p3.state == 'on') %} input_boolean.turn_on
+             {% elif (states.input_text.lms_p3.state == 'off') %} input_boolean.turn_off
+             {% endif %}
+      entity_id: input_boolean.lms_shuffle
+# Set Repeat
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{lms_repeat}}"
+    - service_template: >
+             {% if ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_repeat.state == "on")) %} input_boolean.turn_on
+             {% elif ((states.input_text.lms_p3.state == '') and (states.input_boolean.lms_repeat.state == "off")) %} input_boolean.turn_off
+             {% elif (states.input_text.lms_p3.state == 'on') %} input_boolean.turn_on
+             {% elif (states.input_text.lms_p3.state == 'off') %} input_boolean.turn_off
+             {% endif %}
+      entity_id: input_boolean.lms_repeat
+# Set artist
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_artist
+        value: "{{lms_artist}}"
+# Set album
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_album
+        value: "{{lms_album}}"
+# Set song
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_song
+        value: "{{lms_song}}"
+# Set playlist
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_playlist
+        value: "{{lms_playlist}}"
+# Set volume (filter for empty)
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{lms_volume}}"
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.lms_volume
+        value: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_number.lms_volume.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+# Set sleep time (filter for empty)
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{lms_sleep_time}}"
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.lms_sleep_time
+        value: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_number.lms_sleep_time.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+
+# Set Master Player
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p3
+        value: "{{lms_master_player}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_sync_master
+        option: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_sync_master.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+
+# Set Sync Player - Uses input_text.lms_p1 so be sure to make this the last set command no to overwrite p1.
+    - service: input_text.set_value
+      data_template:
+        entity_id: input_text.lms_p1
+        value: "{{lms_sync_player}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.lms_sync_player
+        option: >
+            {% if (states.input_text.lms_p1.state == '') %} none
+            {% endif %}
+
+### check lms_command and call appropriate script
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+            {% if (lms_command == "next track") %}
+              script.lms_cmd_next_track
+            {% elif (lms_command == "pause player") %}
+              script.lms_cmd_pause_player
+            {% elif (lms_command == "start player") %}
+              script.lms_cmd_start_player
+            {% elif ((lms_command == "play song") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_play_song
+            {% elif ((lms_command == "play song") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_play_song_spot  
+            {% elif ((lms_command == "play playlist") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_play_playlist
+            {% elif ((lms_command == "play playlist") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_play_playlist_spot
+            {% elif ((lms_command == "play artist") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_play_artist
+            {% elif ((lms_command == "play artist") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_play_artist_spot
+            {% elif ((lms_command == "play album") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_play_album
+            {% elif ((lms_command == "play album") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_play_album_spot
+            {% elif ((lms_command == "add album") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_add_album
+            {% elif ((lms_command == "add album") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_add_album_spot
+            {% elif ((lms_command == "add artist") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_add_artist
+            {% elif ((lms_command == "add artist") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_add_artist_spot
+            {% elif ((lms_command == "add song") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_add_song
+            {% elif ((lms_command == "add song") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_add_song_spot
+            {% elif ((lms_command == "add playlist") and (states.input_select.lms_source.state == "lms")) %}
+              script.lms_cmd_add_playlist
+            {% elif ((lms_command == "add playlist") and (states.input_select.lms_source.state == "spotify")) %}
+              script.lms_cmd_add_playlist_spot
+            {% elif (lms_command == "play radio") %}
+              script.lms_cmd_play_radio
+            {% elif (lms_command == "sync one") %}
+              script.lms_cmd_sync_one
+            {% elif (lms_command == "sync all") %}
+              script.lms_cmd_sync_all
+            {% elif (lms_command == "unsync one") %}
+              script.lms_cmd_unsync_one
+            {% elif (lms_command == "unsync all") %}
+              script.lms_cmd_unsync_all
+            {% else %}
+              script.lms_do_nothing
+            {% endif %}
+
+
+
+
+  whats_playing_intent:
+    action:
+      # Set player
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.lms_p3
+          value: "{{lms_player}}"
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.lms_player
+          option: >
+            {% if (states.input_text.lms_p3.state == '') %} {{states.input_select.lms_player.state}}
+            {% else %} {{states.input_text.lms_p3.state}} {% endif %}
+    
+    speech:
+      text: 'As far as I can tell, its {{ state_attr("media_player." + states.input_select.lms_player.state, "media_title")}}
+             by {{ state_attr("media_player." + states.input_select.lms_player.state, "media_artist")}} 
+             from the album {{ state_attr("media_player." + states.input_select.lms_player.state, "media_album_name")}}'
+
+
+
+#      text: "As far as I can tell, it's {{states.media_player.mediaroom.attributes.media_title}} 
+#             by {{states.media_player.mediaroom.attributes.media_artist}} 
+#             from the album {{states.media_player.mediaroom.attributes.media_album_name}}"
+
+
+
+#  LocateIntent:
+#    speech:
+#      text: >
