@@ -10,6 +10,8 @@ The following files need to be edited to add your personal access keys, secrets,
     - **_media_player_** component:
       - Change LMS_Host_IP to your LMS host IP address (ie: 192.168.x.x)
       - Optional username and password for those using secured versions of LMS
+    - **_dialogflow_** component:
+      - Defines the name of the intent script
     - **_shell_command_** component:
       - Lists the shell scripts to be used along with the template information required
       - If you are using a secured version of LMS, the following updates need to be made:
