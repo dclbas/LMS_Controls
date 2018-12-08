@@ -1,6 +1,14 @@
 ## A Couple of Specific Things to Note Regarding LMS Installation
 
+**_LMS Playlists_**
+
+- For local LMS playlists, the playlists name **cannot** include spaces.  Please ensure your playlist names use underscores rather than spaces.  So some of mine include:
+  - Classic_Rock
+  - Jazz_Volcals
+  - Old_time_Country
+
 **_Radio Stations_**
+
 - For radio station support, I cheated. Essentially radio stations are pre-defined in LMS as a playlist with following the naming format: Radio_StationName all in Title Case. So some of mine include:
   - Radio_Cbc
   - Radio_Q92
