@@ -77,7 +77,7 @@ Before starting the installation, please ensure the following:
   - Create a ***long lived access token*** in HA for use with the shell scripts and DialogFlow.  Copy, paste and save this token for later use.  
   - Enable the DialogFlow integration which will provide you a URL and Webhook ID to use for your HA installation.  Copy, paste and save this URL for use in DF fulfillment
 
-Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
+Read the README.md in each software sub-directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
 ​	
 
 ## Home Assistant GUIs for LMS Player Controls Tool:
