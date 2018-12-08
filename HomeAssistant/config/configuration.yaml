@@ -1,7 +1,19 @@
+###  Home Assistant Config for LMS Controls (Voice control of LMS Server)
+###
+###  Dec 06, 2018 - Implemented Webhooks with Intent script (intent.yaml)
+
 media_player:
   - platform: squeezebox
-    host: LMS_Host_IP
+    host: 192.168.0.20
+## username and password is used for secure LMS installations
+##    username: your_username
+##    password: your_password
 
+dialogflow:
+intent_script: !include intent.yaml
+
+##  If your LMS server is secure change the shell script names below to include _sec
+##  ie:  change qry_alb.sh to qry_alb_sec.sh
 shell_command:
   lms_qry_alb: 'bash /config/shell/qry_alb.sh {{text1}} {{text2}}'
   lms_qry_alb_song: 'bash /config/shell/qry_alb_song.sh {{text1}} {{text2}} {{text3}}'
@@ -48,9 +60,21 @@ input_boolean:
   lms_player5_sync:
     name: googlehome
     icon: mdi:cast
-
-
-
+  lms_player6_sync:
+    name: googlemini_1
+    icon: mdi:cast
+  lms_player7_sync:
+    name: googlemini_2
+    icon: mdi:cast
+  lms_player8_sync:
+    name: unassigned
+    icon: mdi:cast
+  lms_player9_sync:
+    name: unassigned
+    icon: mdi:cast
+  lms_player10_sync:
+    name: unassigned
+    icon: mdi:cast
 
 input_select:
   lms_command:
@@ -95,8 +119,6 @@ input_select:
       - googlemini_2
     icon: mdi:cast-connected
 
-
-
 input_text:
   lms_artist:
     name: Artist Name
@@ -123,3 +145,8 @@ input_text:
   lms_p3:
     name: Parameter 3
     max: 500
+
+#python_script:
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include_dir_merge_named scripts
