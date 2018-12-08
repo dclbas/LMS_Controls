@@ -1,9 +1,13 @@
-## Home Assistant Version 0.83 and Up - API_Password Deprecated
-Please note if you upgrade your Home Assistant installation to version 0.83.2 the use of api_password is no longer supported (as pointed out by @kalimeroo) and your webhooks and shell script authentication will need to change to use long-lived tokens.
+## LMS Controls Project Updated - December 8, 2018
+Good news, the LMS Controls project has been updated to incorporate the new Home Assistant authentication system.  This project now uses Long Lived Tokens to authenticate between Google DialogFlow and Home Assistant. 
 
-I will provide an update on the methods in the GitHub https://github.com/ynot123/LMS_Controls over the next week or two. The change is not very complicated but will require an update in several locations including the shell scripts and DialogFlow webhooks.
+In addition, changes at Google and HA have required a different implementation of the webhooks method the two applications.
 
-Standby....
+For those who have already installed this project and simply want a short cheat sheet on how to update your current installation, please see here    https://github.com/ynot123/LMS_Controls/cheatsheet.md
+
+For those starting fresh, please read the rest of this file and then follow the instructions included in `README.md` file in each software sub-directory for this project. 
+
+Thanks and enjoy.
 
 Ynot.
 
@@ -65,8 +69,17 @@ To make this work, you need the following:
 - Optional Spotify account with Client_ID and Client_Secret to allow processing of Spotify music source
 
 ## Installation:	
+Before starting the installation, please ensure the following:
+
+- You have a working version Logitech Media Server with some players defined
+- You have Home Assistant (version 0.80 or greater) running meetign the following criteria:
+  - Secured and accessible from the internet using https protocol (ie: DuckDNS addon)
+  - Create a ***long lived access token*** in HA for use with the shell scripts and DialogFlow.  Copy, paste and save this token for later use.  
+  - Enable the DialogFlow integration which will provide you a URL and Webhook ID to use for your HA installation.  Copy, paste and save this URL for use in DF fulfillment
+
 Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
 ​	
+
 ## Home Assistant GUIs for LMS Player Controls Tool:
 
 **Lovelace GUI** on the left and **Traditional HA GUI** on the right:
@@ -99,3 +112,4 @@ All about Home Assistant.  Lots of development and support going on here.
 
 [Dialogflow Support](https://productforums.google.com/forum/#!forum/dialogflow)\
 Haven't had to use this one so far.  
+
