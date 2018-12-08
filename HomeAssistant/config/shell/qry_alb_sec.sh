@@ -1,6 +1,6 @@
 #!/bin/bash  
-
-query=$(printf "login username password\nartists 0 20 search:$1 tags:a \n" | socat stdio tcp:192.168.0.XX:9090,shut-none )
+HA_Token=Your_Long_Lived_Token_Here
+query=$(printf "login lms_username lms_password\nartists 0 20 search:$1 tags:a \n" | socat stdio tcp:lms_ipaddress:9090,shut-none )
 zero_chk=$query
 art_id=${query#login*id%3A}
 art_id=${art_id%% artist*3A*}
@@ -18,7 +18,7 @@ then
     art_id="0"
     echo
     echo "Artist found so moving on to albums...."
-    query=$(printf "login username password\nalbums 0 20 search:$2 tags:al \n" | socat stdio tcp:192.168.0.XX:9090,shut-none )
+    query=$(printf "login lms_username lms_password\nalbums 0 20 search:$2 tags:al \n" | socat stdio tcp:lms_ipaddress:9090,shut-none )
     zero_chk=$query
     alb_id=${query#login*tags*id%3A}
     alb_id=${alb_id%% album*3A*}
@@ -42,7 +42,7 @@ then
 else
     echo
     echo "Artist found so moving on to albums...."
-    query=$(printf "login username password\nalbums 0 20 artist_id:$art_id search:$2 tags:al \n" | socat stdio tcp:192.168.0.XX:9090,shut-none )
+    query=$(printf "login lms_username lms_password\nalbums 0 20 artist_id:$art_id search:$2 tags:al \n" | socat stdio tcp:lms_ipaddress:9090,shut-none )
     zero_chk=$query
     alb_id=${query#login*tags*id%3A}
     alb_id=${alb_id%% album*3A*}
@@ -72,9 +72,9 @@ echo
 
 
 
-curl -X POST -d '{"state":"'"${art_id}"'"}' https://HA_Link.duckdns.org/api/states/sensor.art_ID?api_password=HA_API_Password
+curl -X POST -d '{"state":"'"${art_id}"'"}' https://HA_Link.duckdns.org/api/states/sensor.art_ID? -H "Authorization Bearer $HA_Token"
 echo
-curl -X POST -d '{"state":"'"${alb_id}"'"}' https://HA_Link.duckdns.org/api/states/sensor.alb_ID?api_password=HA_API_Password
+curl -X POST -d '{"state":"'"${alb_id}"'"}' https://HA_Link.duckdns.org/api/states/sensor.alb_ID? -H "Authorization Bearer $HA_Token"
 echo
-curl -X POST -d '{"state":"'"${name}"'"}' https://HA_Link.duckdns.org/api/states/sensor.lms_name?api_password=HA_API_Password
+curl -X POST -d '{"state":"'"${name}"'"}' https://HA_Link.duckdns.org/api/states/sensor.lms_name? -H "Authorization Bearer $HA_Token"
 echo
