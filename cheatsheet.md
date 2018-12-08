@@ -1,4 +1,4 @@
-## LMS Controls Project Updated - December 8, 2018
+## Cheat Sheet - LMS Controls Project Updated - December 8, 2018
 If you've opened this file, I assume you have previously installed and configured this project and are looking at what's required to update it to the latest HA security model.
 
 Here's the short and skinny.  If you are having trouble with this, please review the full documentation in each subdirectory
