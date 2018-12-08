@@ -3,7 +3,7 @@ Good news, the LMS Controls project has been updated to incorporate the new Home
 
 In addition, changes at Google and HA have required a different implementation of the webhooks method the two applications.
 
-For those who have already installed this project and simply want a short cheat sheet on how to update your current installation, please see here    https://github.com/ynot123/LMS_Controls/cheatsheet.md
+For those who have already installed this project and simply want a short cheat sheet on how to update your current installation, please see here: https://github.com/ynot123/LMS_Controls/blob/master/cheatsheet.md
 
 For those starting fresh, please read the rest of this file and then follow the instructions included in `README.md` file in each software sub-directory for this project. 
 
