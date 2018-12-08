@@ -48,8 +48,10 @@ Implicit intents is a voice command given to the google environment directly as 
   - "Help"
 - **Sample commands** intent, gives a detailed list of sample commands.
   - "Sample commands"
-- **Version** intent, gives the DialogFlow verison number forthe LMS Conrol app.
+- **Version** intent, gives the DialogFlow verison number for the LMS Conrol app.
   - "Version"
+- **What's playing** intent, returns the current track's title, artist name and album to Google.
+  - "What's playing?" or "What's playing in the kitchen"
 - **Finished** intent, is the exit intent.  It ends the conversation, closes the app and returns control to google.  You can quit the app at anytime by saying:
   - "Goodbye" or "Cancel"
 
@@ -58,7 +60,7 @@ Implicit intents is a voice command given to the google environment directly as 
 **Start-Up Phrase:** is used to call up the app for Google Home or Google Assistant and send the intent command all in one sentence. The startup phrase is:
 
   - "Hey google, ask to LMS Controls to [insert explicit intent here]"
-  
+
 Provided your implicit intent was understood google will call up the LMS Controls app and issue your intent directly without asking "How can I help?". If the intent was not understood you will get the "How can I help?" prompt and be returned to explicit mode.
 
 After your command has been issued, you have up to 10 seconds to issue any other follow-up explicit intents before the app closes automatically.
@@ -92,7 +94,7 @@ Some implcit intent examples are:
       AGENT	Playing artist Triumph in the mediaroom
       USER	actions_intent_CANCEL
       AGENT	Goodbye, returning control to google
- 
+
 - Example #3: Explicit intents only
 
       USER	Hey google talk to LMS Controls
@@ -103,4 +105,4 @@ Some implcit intent examples are:
       AGENT	Playing artist rush using the current player
       USER	actions_intent_CANCEL
       AGENT	Goodbye
-    
+  
