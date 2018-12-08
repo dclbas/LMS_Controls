@@ -72,7 +72,7 @@ To make this work, you need the following:
 Before starting the installation, please ensure the following:
 
 - You have a working version Logitech Media Server with some players defined
-- You have Home Assistant (version 0.80 or greater) running meetign the following criteria:
+- You have Home Assistant (version 0.80 or greater) running meeting the following criteria:
   - Secured and accessible from the internet using https protocol (ie: DuckDNS addon)
   - Create a ***long lived access token*** in HA for use with the shell scripts and DialogFlow.  Copy, paste and save this token for later use.  
   - Enable the DialogFlow integration which will provide you a URL and Webhook ID to use for your HA installation.  Copy, paste and save this URL for use in DF fulfillment
