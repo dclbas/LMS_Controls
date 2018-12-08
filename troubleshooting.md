@@ -6,7 +6,7 @@ Once the HA files are installed you can test the basic installation using the GU
   - If that works then fill out the source and artist fields and select the play artist function and ensure it gets queued to your selected player and starts playing.  After the command launches the command window returns to **____________** command.
   - If you got this far, sounds like to HA components are working properly.
   - If the queuing functions are not functioning for either the LMS or Spotify sources (or both), confirm the shell scripts are operating properly (see troubelshooting shell commands).
-  
+
 **_Shell Commands:_**
 
 The query functions for both LMS and Spotify music sources can be run on their own in a shell environment.  The general format for running the commands is: `bash command.sh $1 $2 $3` where command is the shell command name, $1 is the first parameter to pass (ie: artist) $2 is the second parameter (ie: album) and $3 is the third parameter (ie: song).  Below are some of the commands and expected results which then get returned to HA.
@@ -38,10 +38,10 @@ now Posting results
 {"attributes": {}, "entity_id": "sensor.alb_id", "last_changed": "2018-07-26T23:38:14.423206+00:00", "last_updated": "2018-07-26T23:38:14.423206+00:00", "state": "3661"} 
 ```
 In this case it picked out **Artists ID: 2909** and **Album ID: 3661** and posted those reults to sensor.art_id and sensor.alb_id respectively.  These values will later be used in the add or play LMS album script.
-  
+
 
 A typical query against the Spotify music source is shown below (notice spaces are replaced with + for Spotify queries):
-  
+
 ```bash-4.4# bash spot_art_alb.sh supertramp breakfast+in+america```
 
 Results in:
