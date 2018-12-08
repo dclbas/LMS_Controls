@@ -3,6 +3,8 @@ Please note if you upgrade your Home Assistant installation to version 0.83.2 th
 
 I will provide an update on the methods in the GitHub https://github.com/ynot123/LMS_Controls over the next week or two. The change is not very complicated but will require an update in several locations including the shell scripts and DialogFlow webhooks.
 
+Standby....
+
 Ynot.
 
 ## LMS Controls:
@@ -34,7 +36,7 @@ See the following link for some examples of the voice commands available: [examp
 
 ## Basic Approach:
 The basic approach is as follows:
-	
+​	
 - Voice Intents are handled by Dialogflow (DF) where you define the following:
 	- LMS command you want (set volume, play artist, etc..)
 	- Set the details of the query (artist name, song title, etc.)
@@ -64,7 +66,7 @@ To make this work, you need the following:
 
 ## Installation:	
 Read the README.md in each software directory for the details.  Nothing here is automatic but with a bit of technical knowledge and perseverance you should be able to get there from here.
-	
+​	
 ## Home Assistant GUIs for LMS Player Controls Tool:
 
 **Lovelace GUI** on the left and **Traditional HA GUI** on the right:
