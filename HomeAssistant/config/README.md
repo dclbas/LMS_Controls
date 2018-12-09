@@ -54,7 +54,7 @@ The following files need to be edited to add your personal access keys, secrets,
 - **_customize.yaml_** file:
   - The content of this file can be merged into your `customize.yaml` file.
   - This file customizes some of the entity entries to reflect proper icons, names and for the media players adds an additional attribute with the MAC address as this is not directly available in HA
-  - All **media_player** entries need to be modified to reflect the name of your media players and their respective MAC addresses.  This is required for the Sync tools ot function properly.
+  - All **media_player** entries need to be modified to reflect the name of your media players and their respective MAC addresses.  This is required for the Sync tools to function properly.
 - **_groups.yaml_** file:
   - The content of this file can be merged into your `groups.yaml` file to create the basic GUI used in HA.  A somewhat better looking GUI is available when using the Lovelace GUI.
 - **_ui-lovelace.yaml_** file:
