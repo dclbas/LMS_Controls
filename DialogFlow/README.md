@@ -13,6 +13,5 @@ In order to get started you need to sign up for an account at the [DialogFlow we
 
 **_Entities_** updates:
 
-- Under the DF sidebar, select Entities and choose `@lms_player`.  Update the names and synonyms to reflect your player entity names and any synonyms you may have for them.  The player entity names are the part after the `media_player.`of your existing LMS players in HA.  As an example entity `media_player.kitchen` the name would be **kitchen**
-- Choose `@lms_source` and update the music source entity if required.  At this time, only LMS (local) and Spotify are supported.
-- Choose `@lms_sync_player`.  Update the names and synonyms to reflect your (upto 5) sync destination player entity names and any synonyms you may have for them.  
+- Under the DF sidebar, select Entities and choose `@mediaplayers`.  Update the names and synonyms to reflect your player entity names and any synonyms you may have for them.  The player entity names are the part after the `media_player.`of your existing LMS players in HA.  As an example entity `media_player.kitchen` the name would be **kitchen**
+- Choose `@source` and update the music source entity if required.  At this time, only LMS (local) and Spotify are supported.  
