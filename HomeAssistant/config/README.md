@@ -29,9 +29,9 @@ The following files need to be edited to add your personal access keys, secrets,
         - Volume, Sleep Timer, Shuffle, Repeat, Pause, Re-start, Next Track and LMS_commands for (Add / Play artists, albums, songs, playlists and radio stations) and sync functions
 - ***intent.yaml*** file:
   - Copy this file to your HA config directory.  It contains the Action Intents defined in DialogFlow.  The webhooks in DF land here.
+    - Sets the input variables returned from DialogFlow (Google Home Requests)
 - **_script_lms_controls.yaml_** file:
   - The contents of this file need to be merged into your current scripts.yaml file.  This file performs the following functions:
-    - Sets the input variables returned from DialogFlow (Google Home Requests)
     - Calls the query functions to determine song, album, artist or playlist links from either LMS database or Spotify
     - Adds the links to the selected media player queue using either ADD or PLAY functions
     - Provides Pause, Re-start or Next track functions for selected player
